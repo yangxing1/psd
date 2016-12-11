@@ -21,24 +21,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="task_1_7.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task_1_7.html">
+      <file leaf-file-name="task_1_9.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task_1_9/task_1_9.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="838">
-              <caret line="267" column="27" selection-start-line="267" selection-start-column="27" selection-end-line="267" selection-end-column="27" />
+            <state relative-caret-position="195">
+              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
               <folding>
-                <element signature="n#style#0;n#label#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="task_1_7.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/task_1_7.css">
+      <file leaf-file-name="task_1_9.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/task_1_9/task_1_9.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="534" column="11" selection-start-line="534" selection-start-column="11" selection-end-line="534" selection-end-column="11" />
+            <state relative-caret-position="915">
+              <caret line="61" column="1" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -68,8 +67,13 @@
         <option value="$PROJECT_DIR$/task_1_3.html" />
         <option value="$PROJECT_DIR$/task_1_5.css" />
         <option value="$PROJECT_DIR$/task_1_5.html" />
-        <option value="$PROJECT_DIR$/task_1_7.html" />
         <option value="$PROJECT_DIR$/task_1_7.css" />
+        <option value="$PROJECT_DIR$/task_1_7.html" />
+        <option value="$PROJECT_DIR$/task_1_7/task_1_7.html" />
+        <option value="$PROJECT_DIR$/task_1_7/task_1_7.css" />
+        <option value="$PROJECT_DIR$/task_1_8/task_1_8.html" />
+        <option value="$PROJECT_DIR$/task_1_9/task_1_9.html" />
+        <option value="$PROJECT_DIR$/task_1_9/task_1_9.css" />
       </list>
     </option>
   </component>
@@ -99,7 +103,7 @@
     <option name="STATE" value="1" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="Scratches" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -114,7 +118,18 @@
     </navigator>
     <panes>
       <pane id="Scratches">
-        <subPane />
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.intellij.ide.scratch.ScratchProjectViewPane$MyProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IDE Scripting" />
+              <option name="myItemType" value="com.intellij.ide.scratch.ScratchProjectViewPane$MyRootNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
       </pane>
       <pane id="Scope">
         <subPane subId="Problems" />
@@ -129,30 +144,13 @@
         <subPane subId="Tests" />
       </pane>
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="starTree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="starTree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="starTree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/task_1_1.html" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="SearchEverywhereHistoryKey" value="touch&#9;null&#9;null" />
@@ -168,20 +166,20 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.task_1_7.html">
-    <configuration default="false" name="task_1_2.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_2.html">
+  <component name="RunManager" selected="JavaScript Debug.task_1_9.html">
+    <configuration default="false" name="task_1_3.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_3/task_1_3.html">
       <method />
     </configuration>
-    <configuration default="false" name="task_1_3.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_3.html">
+    <configuration default="false" name="task_1_5.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_5/task_1_5.html">
       <method />
     </configuration>
-    <configuration default="false" name="task_1_4.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" engineId="c6767001-bcbf-407b-9771-5bc76876fb14" uri="http://localhost:63343/starTree/task_1_4.html">
+    <configuration default="false" name="task_1_7.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_7/task_1_7.html">
       <method />
     </configuration>
-    <configuration default="false" name="task_1_5.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_5.html">
+    <configuration default="false" name="task_1_8.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_8/task_1_8.html">
       <method />
     </configuration>
-    <configuration default="false" name="task_1_7.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_7.html">
+    <configuration default="false" name="task_1_9.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/starTree/task_1_9/task_1_9.html">
       <method />
     </configuration>
     <configuration default="true" type="ChromiumRemoteDebugType" factoryName="Chromium Remote" port="63343">
@@ -253,24 +251,24 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <configuration default="false" name="task_1_1.html" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63342/starTree/task_1_1.html">
+    <configuration default="false" name="task_1_1.html" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63342/starTree/task_1_1/task_1_1.html">
       <method />
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.task_1_1.html" />
-      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.task_1_2.html" />
-      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.task_1_3.html" />
-      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.task_1_4.html" />
-      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.task_1_5.html" />
-      <item index="5" class="java.lang.String" itemvalue="JavaScript Debug.task_1_7.html" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.task_1_3.html" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.task_1_5.html" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.task_1_7.html" />
+      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.task_1_8.html" />
+      <item index="5" class="java.lang.String" itemvalue="JavaScript Debug.task_1_9.html" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.task_1_7.html" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.task_1_3.html" />
-        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.task_1_5.html" />
-        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.task_1_4.html" />
-        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.task_1_2.html" />
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.task_1_9.html" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.task_1_8.html" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.task_1_7.html" />
+        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.task_1_3.html" />
+        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.task_1_5.html" />
       </list>
     </recent_temporary>
   </component>
@@ -312,11 +310,17 @@
       <workItem from="1480644652024" duration="17000" />
       <workItem from="1480644731079" duration="9158000" />
       <workItem from="1480678647806" duration="7079000" />
+      <workItem from="1480754163597" duration="1913000" />
+      <workItem from="1480815982451" duration="146000" />
+      <workItem from="1480818100348" duration="10123000" />
+      <workItem from="1480845797215" duration="10478000" />
+      <workItem from="1480928830082" duration="4671000" />
+      <workItem from="1481465041780" duration="3962000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99943000" />
+    <option name="totallyTimeSpent" value="131236000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -369,36 +373,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/task_1_2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html" />
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="6623" column="13" selection-start-line="6623" selection-start-column="13" selection-end-line="6623" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html" />
-    <entry file="file://$PROJECT_DIR$/task_1_1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task_1_1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/task_1_1.html" />
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -416,52 +391,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task_1_3_temp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-804">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task_1_3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="81" column="19" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task_1_4.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/task_1_3_temp.html" />
+    <entry file="file://$PROJECT_DIR$/task_1_3.html" />
+    <entry file="file://$PROJECT_DIR$/task_1_4.html" />
     <entry file="file://$PROJECT_DIR$/task_1_5.css" />
-    <entry file="file://$PROJECT_DIR$/task_1_2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="996">
-          <caret line="250" column="28" selection-start-line="250" selection-start-column="28" selection-end-line="250" selection-end-column="28" />
-          <caret line="274" column="28" selection-start-line="274" selection-start-column="28" selection-end-line="274" selection-end-column="28" />
-          <caret line="290" column="69" selection-start-line="290" selection-start-column="69" selection-end-line="290" selection-end-column="69" />
-          <caret line="291" column="69" selection-start-line="291" selection-start-column="69" selection-end-line="291" selection-end-column="69" />
-          <caret line="292" column="69" selection-start-line="292" selection-start-column="69" selection-end-line="292" selection-end-column="69" />
-          <caret line="293" column="69" selection-start-line="293" selection-start-column="69" selection-end-line="293" selection-end-column="69" />
-          <caret line="294" column="69" selection-start-line="294" selection-start-column="69" selection-end-line="294" selection-end-column="69" />
-          <caret line="295" column="69" selection-start-line="295" selection-start-column="69" selection-end-line="295" selection-end-column="69" />
-          <caret line="296" column="69" selection-start-line="296" selection-start-column="69" selection-end-line="296" selection-end-column="69" />
-          <caret line="297" column="69" selection-start-line="297" selection-start-column="69" selection-end-line="297" selection-end-column="69" />
-          <caret line="298" column="69" selection-start-line="298" selection-start-column="69" selection-end-line="298" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task_1_1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/task_1_2.html" />
+    <entry file="file://$PROJECT_DIR$/task_1_1.html" />
     <entry file="file://$PROJECT_DIR$/img/task07-background01.png" />
     <entry file="file://$PROJECT_DIR$/img/task07-background02.png" />
     <entry file="file://$PROJECT_DIR$/img/task07-background02-01.png" />
@@ -493,28 +428,49 @@
     <entry file="file://$PROJECT_DIR$/img/task07-header03.png" />
     <entry file="file://$PROJECT_DIR$/img/task07-footer04.png" />
     <entry file="file://$PROJECT_DIR$/img/task07-header02.png" />
-    <entry file="file://$PROJECT_DIR$/task_1_5.html">
+    <entry file="file://$PROJECT_DIR$/task_1_5.html" />
+    <entry file="file://$PROJECT_DIR$/task_1_7.css" />
+    <entry file="file://$PROJECT_DIR$/task_1_7.html" />
+    <entry file="file://$PROJECT_DIR$/task_1_7/task_1_7.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task_1_7.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="838">
-          <caret line="267" column="27" selection-start-line="267" selection-start-column="27" selection-end-line="267" selection-end-column="27" />
+        <state relative-caret-position="4290">
+          <caret line="286" column="21" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
           <folding>
-            <element signature="n#style#0;n#label#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task_1_7.css">
+    <entry file="file://$PROJECT_DIR$/task_1_8/task_1_8.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="534" column="11" selection-start-line="534" selection-start-column="11" selection-end-line="534" selection-end-column="11" />
+        <state relative-caret-position="795">
+          <caret line="53" column="6" selection-start-line="53" selection-start-column="6" selection-end-line="53" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task_1_7/task_1_7.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task_1_9/task_1_9.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#label#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task_1_9/task_1_9.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" column="1" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
           <folding />
         </state>
       </provider>
