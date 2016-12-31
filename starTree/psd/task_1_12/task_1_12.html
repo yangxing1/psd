@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    table {
+      width: 300px;
+    }
+    table tr {
+      height: 30px;
+    }
+    table .head td {
+      background-color: #000;
+      color: #fff;
+    }
+    table tbody tr:nth-child(-n+4) {
+      color: red;
+    }
+    table tbody tr:nth-child(odd) {
+      background-color: #999;
+    }
+
+    @keyframes myanimate {
+      from {
+        width: 200px;
+      }
+      to {
+        width: 300px;
+      }
+    }
+    .form input:focus {
+      animation: myanimate 1s;
+      animation-fill-mode: forwards;
+    }
+
+    ul, li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    .box {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      overflow: hidden;
+    }
+    .box label {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      bottom: 20px;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 20px;
+      background-color: #00ffcc;
+      opacity: 0.7;
+      z-index: 0;
+    }
+    .box input {
+      display: none;
+    }
+    .box label[for=btn1] {
+      right: calc(50 * 3px);
+    }
+    .box label[for=btn2] {
+      right: calc(50 * 2px);
+    }
+    .box label[for=btn3] {
+      right: calc(50 *1px);
+    }
+    .box #photos {
+      position: absolute;
+      width: calc(300 * 3px);
+      height: 200px;
+      display: flex;
+      left:0;
+      top: 0;
+      z-index: -999;
+    }
+    .box #photos .photos_item {
+      position: relative;
+      width: 300px;
+      height: 200px;
+    }
+    #photos #a {
+      background-color: #0f0;
+    }
+    #photos #b {
+      background-color: #00f;
+    }
+    #photos #c {
+      background-color: #f00;
+    }
+
+    @keyframes select1 {
+      from {
+        left: -600px;
+      }
+      to {
+        left: 0;
+      }
+    }
+    @keyframes select2 {
+      from {
+        left: 0;
+      }
+      to {
+        left: -300px;
+      }
+    }
+    @keyframes select3 {
+      from {
+        left: 0;
+      }
+      to {
+        left: -600px;
+      }
+    }
+
+    @keyframes banner {
+      0%, 25% {
+        left: 0;
+      }
+      36%, 61% {
+        left: -300px;
+      }
+      69%, 100% {
+        left: -600px;
+      }
+    }
+    #photos {
+      animation: banner 6s linear infinite alternate forwards;
+    }
+
+
+    .btn1:checked ~ #photos {
+      animation: select1 1s ease-out;
+      animation-fill-mode: forwards;
+    }
+    .btn2:checked ~ #photos {
+      animation: select2 1s ease-out;
+      animation-fill-mode: forwards;
+    }
+    .btn3:checked ~ #photos {
+      animation: select3 1s ease-out;
+      animation-fill-mode: forwards;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tbody>
+    <tr class="head"><td>排名</td><td>网站</td><td>热度</td></tr>
+    <tr><td>1.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>2.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>3.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>4.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>5.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>6.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>7.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>8.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>9.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    <tr><td>10.</td><td>百度前端技术学院</td><td>13000</td></tr>
+    </tbody>
+  </table>
+  <form action="#" class="form">
+    <p>
+      <label for="one"></label>
+      <input type="text" id="one">
+    </p>
+    <p>
+      <label for="two"></label>
+      <input type="text" id="two">
+    </p>
+  </form>
+  <div class="box">
+    <label for="btn1">1</label>
+    <label for="btn2">2</label>
+    <label for="btn3">3</label>
+    <input type="radio" class="btn1" id="btn1" name="radio">
+    <input type="radio" class="btn2" id="btn2" name="radio">
+    <input type="radio" class="btn3" id="btn3" name="radio">
+    <ul id="photos">
+      <li class="photos_item" id="a"></li>
+      <li class="photos_item" id="b"></li>
+      <li class="photos_item" id="c"></li>
+    </ul>
+  </div>
+</body>
+</html>

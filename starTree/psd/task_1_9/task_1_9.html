@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./task_1_9.css">
+  <title>starTree</title>
+</head>
+<body>
+  <div class="page">
+    <div class="head clearfix">
+      <a href="#" class="logo"></a>
+      <span class="login">
+          <a href="#">登陆</a>
+      </span>
+      <form action="#" class="head_form">
+        <label for="head_search" style="display:none;">search</label>
+        <input type="text" id="head_search" class="head_search">
+      </form>
+    </div>
+    <div class="main clearfix">
+      <div class="left">
+        <div class="user clearfix">
+          <span class="round_big">
+            <span class="round_small"></span>
+          </span>
+          <p class="username">StarTree</p>
+        </div>
+        <ul class="info clearfix">
+          <li class="item">
+            <p class="text">110</p>
+            <p class="text">收藏</p>
+          </li>
+          <li class="item border_left">
+            <p class="text">313</p>
+            <p class="text">粉丝</p>
+          </li>
+        </ul>
+        <ul class="menu_list">
+          <li class="menu_item option" id="menu_1">
+            <span class="title white">个人报表</span>
+            <ul class="menu_two_list">
+              <li class="menu_two_item">
+                <span class="two_title">文件一</span>
+                <ul class="menu_three_list">
+                  <li class="menu_three_item">
+                    <span class="three_title">文档1</span>
+                  </li>
+                  <li class="menu_three_item">
+                    <span class="three_title">文档2</span>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu_two_item two_option">
+                <span class="two_title white">文件二</span>
+                <ul class="menu_three_list">
+                  <li class="menu_three_item three_option">
+                    <span class="three_title white">文档1</span>
+                  </li>
+                  <li class="menu_three_item">
+                    <span class="three_title">文档2</span>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu_two_item">
+                <span class="two_title">文件三</span>
+                <ul class="menu_three_list">
+                  <li class="menu_three_item">
+                    <span class="three_title">文档1</span>
+                  </li>
+                  <li class="menu_three_item">
+                    <span class="three_title">文档2</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="menu_item" id="menu_2">
+            <span class="title">个人收藏</span>
+          </li>
+          <li class="menu_item" id="menu_3">
+            <span class="title">我的分享</span>
+          </li>
+          <li class="menu_item" id="menu_4">
+            <span class="title">图库</span>
+          </li>
+          <li class="menu_item" id="menu_5">
+            <span class="title">成长记录</span>
+          </li>
+          <li class="menu_item" id="menu_6">
+            <span class="title">帐户信息</span>
+          </li>
+        </ul>
+        </div>
+        <div class="right">
+          <div class="head_title">
+            <p>c站</p><span> / </span><p>个人报表</p> <span> / </span><p>文件一 </p><span> / </span><p class="option">文档1</p>
+          </div>
+          <div class="content clearfix">
+            <form class="right_form">
+              <ul class="query_list clearfix">
+                <li class="query_item option">
+                  <p>
+                    <label for="number">查询项</label>
+                    <select name="number" id="number">
+                      <option value="第一项">第一项</option>
+                    </select>
+                  </p>
+                </li>
+                <li class="query_item change">
+                  <p>
+                    <label for="buy">买方</label>
+                    <select name="buy" id="buy">
+                      <option value="小A">小A</option>
+                    </select>
+                  </p>
+                  <p>
+                    <label for="sell">买方</label>
+                    <select name="sell" id="sell">
+                      <option value="小C">小C</option>
+                    </select>
+                  </p>
+                </li>
+                <li class="query_item">
+                  <p>
+                    <label for="date">日期</label>
+                    <input type="text" id="date" value="2016-04-01">
+                    <label for="consume">总耗时</label>
+                    <select name="consume" id="consume">
+                      <option value="8天">8天</option>
+                    </select>
+                  </p>
+                  <p>
+                    <label for="count">人数</label>
+                    <select name="count" id="count">
+                      <option value="8人">8人</option>
+                    </select>
+                    <label for="done">成交项</label>
+                    <select name="done" id="done">
+                      <option value="10项">10项</option>
+                    </select>
+                  </p>
+                </li>
+                <li class="query_item submit">
+                  <label for="submit" style="display:none;">搜索</label>
+                  <input type="submit" value="搜索" id="submit">
+                </li>
+              </ul>
+            </form>
+            <div class="history clearfix">
+              <a class="history_left btn"></a>
+              <ul class="date_list clearfix">
+                <li class="date_item option">
+                  <p class="t1">10:00 <span>am</span></p>
+                  <p class="t2">1200</p>
+                </li>
+                <li class="date_item">
+                  <p class="t1">11:00 <span>am</span></p>
+                  <p class="t2">1300</p>
+                </li>
+                <li class="date_item">
+                  <p class="t1">12:00 <span>am</span></p>
+                  <p class="t2">1200</p>
+                </li>
+                <li class="date_item">
+                  <p class="t1">01:00 <span>am</span></p>
+                  <p class="t2">1400</p>
+                </li>
+                <li class="date_item">
+                  <p class="t1">02:00 <span>am</span></p>
+                  <p class="t2">1500</p>
+                </li>
+                <li class="date_item">
+                  <p class="t1">03:00 <span>am</span></p>
+                  <p class="t2">1800</p>
+                </li>
+              </ul>
+              <a class="history_right btn"></a>
+              <span class="history_title">
+                历史查询
+              </span>
+            </div>
+            <div class="count">
+              <span class="count_title">2016年4月份统计</span>
+              <ul class="block_list clearfix">
+                <li class="block_item green clearfix">
+                  <div class="info">
+                    <p class="t1">133311</p>
+                    <p class="t2">成交量</p>
+                  </div>
+                  <span class="block"></span>
+                </li>
+                <li class="block_item blue clearfix">
+                  <div class="info">
+                    <p class="t1">133311</p>
+                    <p class="t2">成交量</p>
+                  </div>
+                  <span class="block"></span>
+                </li>
+                <li class="block_item red clearfix">
+                  <div class="info">
+                    <p class="t1">133311</p>
+                    <p class="t2">成交量</p>
+                  </div>
+                  <span class="block"></span>
+                </li>
+                <li class="block_item yellow clearfix">
+                  <div class="info">
+                    <p class="t1">133311</p>
+                    <p class="t2">成交量</p>
+                  </div>
+                  <span class="block"></span>
+                </li>
+              </ul>
+            </div>
+            <div class="box tab">
+              <div class="box_head">
+                <span class="box_title">
+                  第一组项目
+                </span>
+              </div>
+              <div class="box_main">
+                <ul class="tab_list">
+                  <li class="tab_item">
+                    <input type="radio" class="tab_none" id="tab_1" checked="checked" name="radio">
+                    <label for="tab_1">项目一</label>
+                    <div class="table">
+                      <table>
+                        <tbody>
+                        <tr><td class="option">购买材料一</td><td>购买材料一</td><td>购买材料一</td><td>购买材料一</td></tr>
+                        <tr><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td></tr>
+                        <tr><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td></tr>
+                        <tr><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td></tr>
+                        <tr><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td></tr>
+                        <tr><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                  <li class="tab_item">
+                    <input type="radio" class="tab_none" id="tab_2" name="radio">
+                    <label for="tab_2">项目一</label>
+                    <div class="table">
+                      <table>
+                        <tbody>
+                        <tr><td>购买材料一</td><td class="option">购买材料一</td><td>购买材料一</td><td>购买材料一</td></tr>
+                        <tr><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td></tr>
+                        <tr><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td></tr>
+                        <tr><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td></tr>
+                        <tr><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td></tr>
+                        <tr><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                  <li class="tab_item">
+                    <input type="radio" class="tab_none" id="tab_3" name="radio">
+                    <label for="tab_3">项目一</label>
+                    <div class="table">
+                      <table>
+                        <tbody>
+                        <tr><td>购买材料一</td><td>购买材料一</td><td class="option">购买材料一</td><td>购买材料一</td></tr>
+                        <tr><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td></tr>
+                        <tr><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td></tr>
+                        <tr><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td></tr>
+                        <tr><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td></tr>
+                        <tr><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                  <li class="tab_item">
+                    <input type="radio" class="tab_none" id="tab_4" name="radio">
+                    <label for="tab_4">项目一</label>
+                    <div class="table">
+                      <table>
+                        <tbody>
+                        <tr><td>购买材料一</td><td>购买材料一</td><td>购买材料一</td><td class="option">购买材料一</td></tr>
+                        <tr><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td></tr>
+                        <tr><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td></tr>
+                        <tr><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td></tr>
+                        <tr><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td></tr>
+                        <tr><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                  <li class="tab_item">
+                    <input type="radio" class="tab_none" id="tab_5" name="radio">
+                    <label for="tab_5">项目一</label>
+                    <div class="table">
+                      <table>
+                        <tbody>
+                        <tr><td>购买材料一</td><td>购买材料一</td><td>购买材料一</td><td>购买材料一</td></tr>
+                        <tr><td class="option">购买材料二</td><td>购买材料二</td><td>购买材料二</td><td>购买材料二</td></tr>
+                        <tr><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td><td>购买材料四</td></tr>
+                        <tr><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td><td>购买材料六</td></tr>
+                        <tr><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td><td>购买材料十三</td></tr>
+                        <tr><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td><td>购买材料二十</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="box bookend">
+              <div class="box_head">
+                <span class="box_title">第一组项目</span>
+              </div>
+              <div class="box_main">
+                <div class="info">
+                  <p class="t1">标题</p>
+                  <p class="t2">项目报表三</p>
+                </div>
+                <div class="center clearfix">
+                  <div class="info option1 ">
+                    <p class="t1">价格</p>
+                    <p class="t2">158</p>
+                  </div>
+                  <div class="info option2">
+                    <p class="t1">负责人</p>
+                    <p class="t2">小A</p>
+                  </div>
+                </div>
+                <div class="info">
+                  <p class="t1">详细描述</p>
+                  <p class="t2">该项目目前负责人是。。。</p>
+                </div>
+              </div>
+            </div>
+            <div class="box calendar">
+              <div class="box_head">
+                <span class="box_title">日历</span>
+              </div>
+              <div class="box_main">
+                <ul class="calendar_list clearfix">
+                  <li class="calendar_item">
+                    <label for="year"></label>
+                    <select name="" id="year">
+                      <option value="2016">2016年</option>
+                    </select>
+                  </li>
+                  <li class="calendar_item">
+                    <label for="moon"></label>
+                    <select name="" id="moon">
+                      <option value="4">4月</option>
+                    </select>
+                  </li>
+                  <li class="calendar_item">
+                    <label for="day"></label>
+                    <select name="" id="day">
+                      <option value="">标注日期</option>
+                    </select>
+                  </li>
+                  <li class="calendar_item">
+                    <label for="today"></label>
+                    <input type="submit" id="today" value="返回今天">
+                  </li>
+                </ul>
+                <ul class="week_list clearfix">
+                  <li class="week_item">
+                    <span class="week">一</span>
+                  </li>
+                  <li class="week_item">
+                    <span class="week">二</span>
+                  </li>
+                  <li class="week_item">
+                    <span class="week">三</span>
+                  </li>
+                  <li class="week_item">
+                    <span class="week">四</span>
+                  </li>
+                  <li class="week_item">
+                    <span class="week">五</span>
+                  </li>
+                  <li class="week_item">
+                    <span class="week">六</span>
+                  </li>
+                  <li class="week_item">
+                    <span class="week">七</span>
+                  </li>
+                </ul>
+                <ul class="day_list clearfix">
+
+                </ul>
+              </div>
+            </div>
+            <div class="box top">
+              <div class="box_head">
+                <span class="box_title">汽车行业品牌榜</span>
+              </div>
+              <div class="box_main">
+                <table>
+                  <tbody>
+                  <tr><td>排名</td><td>品牌</td><td>搜索指数</td></tr>
+                  <tr><td>1</td><td>大众</td><td>48912001 <span class="last"></span><span class="next" id="next_1"></span></td></tr>
+                  <tr><td>2</td><td>丰田</td><td>29307333 <span class="last"></span><span class="next" id="next_2"></span></td></tr>
+                  <tr><td>3</td><td>奥迪</td><td>23139070 <span class="last"></span><span class="next" id="next_3"></span></td></tr>
+                  <tr><td>4</td><td>本田</td><td>22885564 <span class="last"></span><span class="next" id="next_4"></span></td></tr>
+                  <tr><td>5</td><td>福特</td><td>22324792 <span class="last"></span><span class="next" id="next_5"></span></td></tr>
+                  <tr><td>6</td><td>宝马</td><td>21444077 <span class="last"></span><span class="next" id="next_6"></span></td></tr>
+                  <tr><td>7</td><td>现代</td><td>20114949 <span class="last"></span><span class="next" id="next_7"></span></td></tr>
+                  <tr><td>8</td><td>起亚</td><td>19251680 <span class="last"></span><span class="next" id="next_8"></span></td></tr>
+                  <tr><td>9</td><td>奔驰</td><td>19172891 <span class="last"></span><span class="next" id="next_9"></span></td></tr>
+                  <tr><td>10</td><td>别克</td><td>18544027<span class="last"></span><span class="next" id="next_10"></span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <script>
+    window.onload = function() {
+      var day_list = document.getElementsByClassName('day_list')[0];
+      var number = 1;
+      var week = 1;
+      for (var i = 1; i <= 35; i++) {
+          var day_item = document.createElement('li');
+          var t1 = document.createElement('p');
+          if (i >= 5 && i < 35) {
+            t1.innerHTML = '' + number++;
+          }
+          day_item.appendChild(t1);
+          day_list.appendChild(day_item);
+          day_item.className = 'day_item';
+          if (week == 6|| week == 7) {
+            day_item.className += ' red';
+          }
+        if (week == 7) {
+          week = 0;
+        }
+        week++;
+      }
+    }
+  </script>
+</body>
+</html>

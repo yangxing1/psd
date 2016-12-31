@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0">
+  <title>starTree</title>
+  <style>
+    /* 公共部分 */
+    body {
+      font-size: 16px;
+    }
+    body, div, ul, li, p, table, tbody, tr, td, h1, h2, h3, h4, span, input {
+      margin: 0;
+      padding: 0;
+    }
+    ul, li {
+      list-style: none;
+    }
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+    /* 清除浮动 */
+    .clearfix:after, .clearfix:before {
+      content: "";
+      display: table;
+    }
+    .clearfix:after {
+      clear: both;
+    }
+    .clearfix {
+      *zoom: 1;
+    }
+
+    .page {
+      background-color: #eee;
+    }
+    .page .head {
+      position: relative;
+      width: 100%;
+      background-color: #fff;
+    }
+    .page .head .head_title {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      background-color: #91d4da;
+      color: #fff;
+      font-size: 1.25em;
+    }
+    .head .head_title .back {
+      width: 75px;
+      padding-left: 36px;
+    }
+    .head .head_title .text {
+      width: calc(100% - 75px);
+      text-align: center;
+    }
+    .page .head .nav {
+      height: 58px;
+      display: flex;
+      justify-content: space-around;
+    }
+    .page .head .nav .nav_item {
+      line-height: 53px;
+      text-align: center;
+      flex: 1 1 auto;
+    }
+    .page .head .nav .nav_item a {
+      color: #000;
+      font-size: 1.25em;
+    }
+    .page .head .nav .option {
+      border-bottom: 5px solid #91d4da;
+    }
+
+    .main {
+      position: relative;
+    }
+    .main .img {
+      position: relative;
+      width: 100%;
+      height: 275px;
+    }
+    .main .img .img_item {
+      height: 275px;
+      width: 100%;
+      background-color: #00ffcc;
+      display: none;
+    }
+    .main .img .option {
+      display: block;
+    }
+
+    .main .tag_box {
+      position: relative;
+      width: calc(100% - 30px);
+      height: 360px;
+      padding: 0 15px;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+    .main .tag_box .tag {
+      height: 148px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-bottom: 2px solid #dedede;
+    }
+    .main .tag_box .tag .t1 {
+      display: block;
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      background-color: #00c7d6;
+    }
+    .main .tag_box .tag .t2 {
+      display: block;
+      width: 60px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .main .tag_box .column {
+      position: relative;
+      height: 212px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .main .tag_box .column_item {
+      height: 170px;
+      display: flex;
+      flex: 1 1 auto;
+      flex-flow: column nowrap;
+      justify-content: space-around;
+      align-items: center;
+      border-left: 1px solid #dedede;
+    }
+    .main .tag_box .column_item:first-child {
+      border: none;
+    }
+    .main .tag_box .column_item .t1 {
+      height: 90px;
+      width: 65px;
+      display: block;
+      background-color: #00ffcc;
+    }
+    .main .tag_box .column_item .t2 {
+      font-size: 1.3em;
+    }
+    .main .tag_box .column_item .t3 {
+      font-size: 1.05em;
+    }
+
+
+    .main .model_box {
+      position: relative;
+      height: 330px;
+      width: calc(100% - 30px);
+      padding: 0 15px;
+      margin-top: 15px;
+      background-color: #fff;
+    }
+    .main .model_box .model_head {
+      height: 60px;
+      line-height: 45px;
+      color: #656565;
+      border-bottom: 2px solid #dedede;
+    }
+    .model_box .model_main {
+      height: 238px;
+      margin: 15px 0;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+    }
+    .model_box .model_main .left {
+      width: 120px;
+      height: 238px;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+    }
+    .model_box .model_main .left .img {
+      width: 120px;
+      height: 113px;
+      display: block;
+      background-color: #00ffcc;
+    }
+    .model_box .model_main .right {
+      width: calc(100% - 120px);
+      height: 238px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      align-content: space-between;
+    }
+    .model_box .model_main .right .right_item {
+      flex: 0 1 calc(50% - 12px);
+      width: 160px;
+      height: 45px;
+      margin-left: 12px;
+      line-height: 45px;
+      text-align: center;
+      font-size: 14px;
+      background-color: #f8f8f8;
+    }
+
+
+    .article_list {
+      position: relative;
+      width: calc(100% - 30px);
+      padding: 0 15px;
+      margin-top: 20px;
+      background-color: #fff;
+    }
+    .article_list .article_item {
+      width: 100%;
+      height: 100px;
+      padding: 12px 0;
+      display: flex;
+      flex-flow: column wrap;
+      border-bottom: 2px solid #bedede;
+    }
+    .article_list .article_item .article_img {
+      width: 140px;
+      height: 100px;
+      flex: 2 100%;
+    }
+    .article_list .article_item .article_img .img {
+      width: 140px;
+      height: 100px;
+      display: block;
+      background-color: #00ffcc;
+    }
+    .article_list .article_item .article_title, .article_list .article_item .info {
+      width: calc(100% - 140px - 15px);
+      margin-left: 15px;
+    }
+    .article_list .article_item .article_title {
+      height: 80px;
+      font-size: 1.25em;
+      flex: 1 80%;
+    }
+    .article_list .article_item .info {
+      height: 20px;
+      display: block;
+      flex: 1 20%;
+    }
+    .article_list .article_item .info span {
+      color: #c6c6c6;
+      margin-right: 12px;
+      font-size: 0.8em;
+    }
+    .article_list .article_last {
+      height: auto;
+      border: none;
+      flex-flow: column nowrap;
+    }
+    .article_list .article_last .article_img {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      order: 2;
+    }
+    .article_list .article_last .article_img .img {
+      margin: 0 2px;
+    }
+    .article_list .article_last .article_title, .article_list .article_last .info {
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+    .article_list .article_last .article_title {
+      order: 1;
+      margin-bottom: 15px;
+    }
+    .article_list .article_last .info {
+      order: 3;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="head">
+      <div class="head_title">
+        <span class="back">返回</span>
+        <span class="text">这是一个标题</span>
+      </div>
+      <ul class="nav">
+        <li class="nav_item">
+          <a href="#">导航</a>
+        </li>
+        <li class="nav_item option">
+          <a href="#">导航</a>
+        </li>
+        <li class="nav_item">
+          <a href="#">导航</a>
+        </li>
+        <li class="nav_item">
+          <a href="#">导航</a>
+        </li>
+        <li class="nav_item">
+          <a href="#">导航</a>
+        </li>
+      </ul>
+    </div>
+    <div class="main">
+      <ul class="img">
+        <li class="img_item option"></li>
+      </ul>
+      <div class="tag_box">
+        <ul class="tag">
+          <li class="tag_item">
+            <span class="t1"></span>
+            <span class="t2">标签</span>
+          </li>
+          <li class="tag_item">
+            <span class="t1"></span>
+            <span class="t2">标签</span>
+          </li>
+          <li class="tag_item">
+            <span class="t1"></span>
+            <span class="t2">标签</span>
+          </li>
+          <li class="tag_item">
+            <span class="t1"></span>
+            <span class="t2">标签</span>
+          </li>
+          <li class="tag_item">
+            <span class="t1"></span>
+            <span class="t2">标签</span>
+          </li>
+        </ul>
+        <ul class="column">
+          <li class="column_item">
+            <span class="t1"></span>
+            <span class="t2">分栏一</span>
+            <span class="t3">分栏小标题</span>
+          </li>
+          <li class="column_item">
+            <span class="t1"></span>
+            <span class="t2">分栏二</span>
+            <span class="t3">分栏小标题</span>
+          </li>
+          <li class="column_item">
+            <span class="t1"></span>
+            <span class="t2">分栏三</span>
+            <span class="t3">分栏小标题</span>
+          </li>
+        </ul>
+      </div>
+      <div class="model_box">
+        <div class="model_head">
+          <h2 class="text">模块一</h2>
+        </div>
+        <div class="model_main">
+          <div class="left">
+            <span class="img"></span>
+            <span class="img"></span>
+          </div>
+          <ul class="right">
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="model_box">
+        <div class="model_head">
+          <h2 class="text">模块二</h2>
+        </div>
+        <div class="model_main">
+          <div class="left">
+            <span class="img"></span>
+            <span class="img"></span>
+          </div>
+          <ul class="right">
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+            <li class="right_item">
+              <span class="t1">这是文案</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <ul class="article_list">
+        <li class="article_item">
+          <div class="article_img">
+            <span class="img"></span>
+          </div>
+          <div class="article_title">
+            <a href="#" class="t1">这是文章标题字号是22的文章的标题</a>
+          </div>
+          <div class="info">
+            <span class="author t2">文章来源</span>
+            <span class="date">7分钟前</span>
+          </div>
+        </li>
+        <li class="article_item">
+          <div class="article_img">
+            <span class="img"></span>
+          </div>
+          <div class="article_title">
+            <a href="#" class="t1">这是文章标题字号是22的文章的标题</a>
+          </div>
+          <div class="info">
+            <span class="author t2">文章来源</span>
+            <span class="date">7分钟前</span>
+          </div>
+        </li>
+        <li class="article_item article_last">
+          <div class="article_img">
+            <span class="img"></span>
+            <span class="img"></span>
+            <span class="img"></span>
+          </div>
+          <div class="article_title">
+            <a href="#" class="t1">这是文章标题字号是22的文章的标题</a>
+          </div>
+          <div class="info">
+            <span class="author t2">文章来源</span>
+            <span class="date">7分钟前</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

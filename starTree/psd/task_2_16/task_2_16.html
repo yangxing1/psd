@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <script src="../common/myFunc.js"></script>
+  <style>
+    span {
+      display: none;
+    }
+    div label .show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <label>城市名称：<input id="aqi-city-input" type="text"><span id="city_point">请输入中文及字母</span></label><br>
+  <label>空气质量指数：<input id="aqi-value-input" type="text"><span id="value_point">请输入正整数</span></label><br>
+  <button id="add-btn">确认添加</button>
+</div>
+<table id="aqi-table">
+  <!--
+    <tr>
+      <td>城市</td><td>空气质量</td><td>操作</td>
+    </tr>
+    <tr>
+      <td>北京</td><td>90</td><td><button>删除</button></td>
+    </tr>
+    <tr>
+      <td>北京</td><td>90</td><td><button>删除</button></td>
+    </tr>
+   -->
+</table>
+
+<script>
+  var aqiData = {};
+  var $city = document.getElementById('aqi-city-input');
+  var $value = document.getElementById('aqi-value-input');
+  var $btn = document.getElementById('add-btn');
+  var $table = document.getElementById('aqi-table');
+
+  function value_point() {
+    var value_point = document.getElementById('value_point');
+    point_show(value_point);
+  }
+  function city_point() {
+    var city_point = document.getElementById('city_point');
+    point_show(city_point);
+  }
+  function point_show(point) {
+    point.ClassName = point.className;
+    point.className += 'show';
+    setTimeout(function () {
+      point.className = point.ClassName;
+    }, 2000);
+  }
+
+  function addAqiData() {
+    /* 获取输入
+    * 检查输入的正确性
+    * 添加数据*/
+    var city = $city.value;
+    var value = $value.value;
+    if (city && value) {
+      city = city.replace(/\s/g, '');
+      value = value.replace(/\s/g, '');
+      if (value.search(/\./) !== -1 || value.search(/[^\d]/) !== -1) {
+        value_point();
+        return undefined;
+      }
+      if (city.search(/\d/) !== -1) {
+        city_point();
+        return undefined;
+      }
+      aqiData[city] = value;
+    }
+  }
+  function renderAqiList() {
+    /* 遍历aqiData
+    * 添加节点
+    * 删除所有tr标签
+    * 清空输入框*/
+    $table.parentNode.removeChild($table);
+    var body = document.getElementsByTagName('body')[0];
+    $table = createElement('table');
+    $table.id = 'aqi-table';
+    body.appendChild($table);
+    for(var i in aqiData) {
+      var $tr = createElement('tr');
+      $tr.appendChild(createElement('td', i));
+      $tr.appendChild(createElement('td', aqiData[i]));
+      var $del = createElement('td');
+      var $button = createElement('button', '删除');
+      $button.onclick = delBtnHandle;
+      $del.appendChild($button);
+      $tr.appendChild($del);
+      $table.appendChild($tr);
+    }
+    $city.value = '';
+    $value.value = '';
+  }
+  function addBtnHandle() {
+    /* */
+    addAqiData();
+    renderAqiList();
+  }
+  function delBtnHandle() {
+    /* */
+    var $parent = this.parentNode.parentNode;
+    var $city_temp = $parent.getElementsByTagName('td')[0];
+    delete aqiData[$city_temp.innerHTML];
+    $table.removeChild($parent);
+    renderAqiList();
+  }
+  function init() {
+    $btn.onclick = addBtnHandle;
+  }
+  init();
+</script>
+</body>
+</html>

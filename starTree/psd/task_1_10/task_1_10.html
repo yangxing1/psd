@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>starTree</title>
+  <style type="text/css">
+    body, ul, li {
+      padding: 0;
+      margin: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    .list {
+      padding: 20px;
+      margin: auto;
+    }
+    .item {
+      width: 150px;
+      background-color: #f00;
+    }
+    .one {
+      height: 120px;
+    }
+    .two {
+      height: 100px;
+    }
+    .three {
+      height: 40px;
+    }
+    .four {
+      height: 200px;
+      background-color: #0fc;
+    }
+
+    .list {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media all and (max-width: 640px) {
+      .list {
+        height: 260px;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        align-content: space-between;
+      }
+      .four {
+        order: 1;
+      }
+      .one {
+        order: 2;
+      }
+      .two {
+        order: 3;
+      }
+      .three {
+        order: 4;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <ul class="list">
+    <li class="item one"></li>
+    <li class="item two"></li>
+    <li class="item three"></li>
+    <li class="item four blue"></li>
+  </ul>
+</div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
