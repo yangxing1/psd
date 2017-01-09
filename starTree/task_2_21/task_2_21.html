@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <link rel="stylesheet" href="../common/myStyle.css">
+  <link rel="stylesheet" href="./add_tag.css">
+</head>
+<body>
+  <div class="page">
+    <div class="box">
+      <label for="tag"><input type="text" id="tag" class="transi"></label>
+      <ul id="tag_box" class="box_child">
+
+      </ul>
+    </div>
+    <div class="box">
+      <label for="like"><textarea name="like" id="like" cols="30" rows="10"></textarea></label>
+      <label for="like_define"><input type="button" id="like_define" value="like_define" class="transi"></label>
+      <ul id="like_box" class="box_child">
+
+      </ul>
+    </div>
+  </div>
+  <script src="../common/myFunc.js"></script>
+  <script src="./add_tag.js"></script>
+  <script>
+    var tag = new AddTag('tag_box', 'tag');
+    var like = new AddTag('like_box', 'like');
+    var $tag_input = document.getElementById('tag');
+    var $like_define = document.getElementById('like_define');
+
+    $tag_input.onkeyup = function (event) {
+      var code = event.keyCode;
+      if (code === 13 || code === 32 || code === 190 || code === 188) {
+        tag.add();
+      }
+    };
+    $like_define.onclick = function () {
+      like.add();
+    }
+
+  </script>
+</body>
+</html>
