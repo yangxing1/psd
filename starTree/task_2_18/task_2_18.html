@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <link rel="stylesheet" href="../common/myStyle.css">
+  <style>
+    .box {
+      position: relative;
+      width: 540px;
+      border: 1px solid #00ffcc;
+    }
+    .box .head {
+      position: relative;
+      height: 50px;
+      line-height: 50px;
+      border-bottom: 1px solid #00ffcc;
+    }
+    .box .head label {
+      float: left;
+      margin-left: 20px;
+    }
+    .box .main {
+      position: relative;
+      padding: 20px;
+      text-align: center;
+    }
+    .box .item {
+      position: relative;
+      height: 25px;
+      padding: 0 5px;
+      margin-left: 10px;
+      line-height: 25px;
+      float: left;
+      background-color: #333;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <form action="#" class="head clearfix">
+      <label for="input"><input type="text" id="input"></label>
+      <label for="left_insert"><input type="button" id="left_insert" value="左侧入"></label>
+      <label for="right_insert"><input type="button" id="right_insert" value="右侧入"></label>
+      <label for="left_out"><input type="button" id="left_out" value="左侧出"></label>
+      <label for="right_out"><input type="button" id="right_out" value="右侧出"></label>
+    </form>
+    <div class="main clearfix">
+
+    </div>
+  </div>
+  <script src="../common/myFunc.js"></script>
+  <script>
+    function init() {
+      var $input = document.getElementById('input');
+      var $left_insert = document.getElementById('left_insert');
+      var $left_out = document.getElementById('left_out');
+      var $right_insert = document.getElementById('right_insert');
+      var $right_out = document.getElementById('right_out');
+      var $main = document.getElementsByClassName('main')[0];
+
+      /* 添加节点时判断input是否有输入*/
+      function check_input() {
+        return $input.value ? true : false;
+      }
+
+      /* 绑定按钮事件
+      * 左侧入使用insertBefore()
+      * 如果盒子里没有节点使用appendChild() */
+      $left_insert.onclick = function () {
+        if (!check_input()) return undefined;
+        var value = $input.value;
+        var $item = createElement('div', value);
+        var list_item = document.getElementsByClassName('item');
+        $item.className = 'item';
+        $input.value = '';
+        if (list_item.length) {
+          $main.insertBefore($item, list_item[0]);
+        }
+        else {
+          $main.appendChild($item);
+        }
+      };
+      /* 右侧入直接使用appendchild() */
+      $right_insert.onclick = function () {
+        if (!check_input()) return undefined;
+        var value = $input.value;
+        var $item = createElement('div', value);
+        $item.className = 'item';
+        $input.value = '';
+        $main.appendChild($item);
+      };
+      $left_out.onclick = function () {
+        var list_item = document.getElementsByClassName('item');
+        $main.removeChild(list_item[0]);
+      };
+      $right_out.onclick = function () {
+        var list_item = document.getElementsByClassName('item');
+        $main.removeChild(list_item[list_item.length - 1]);
+      };
+    }
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* 公共部分 */
+body, div, ul, li, p, table, tbody, tr, td, h1, h2, h3, h4, span, input {
+  margin: 0;
+  padding: 0;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+/* 清除浮动 */
+.clearfix:after, .clearfix:before {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}

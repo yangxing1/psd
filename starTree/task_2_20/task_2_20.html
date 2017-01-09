@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .page {
+      width: 90%;
+      height: 150px;
+      margin-top: 20px;
+      margin-left: 20px;
+      border: 2px solid #00ffcc;
+    }
+    .head {
+      height: 50px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      border-bottom: 1px solid #00ffcc;
+    }
+    .head label {
+      margin-left: 20px;
+    }
+    .head #input {
+      height: 30px;
+    }
+    #box {
+      height: 100px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+    }
+    .item {
+      height: 30px;
+      margin-left: 10px;
+      padding: 3px;
+      line-height: 30px;
+      background-color: #999;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="head">
+      <label for="input">
+        <textarea name="input" id="input" cols="30" rows="10"></textarea>
+      </label>
+      <label for="search"><input type="button" id="search" value="search"></label>
+      <label for="left_insert">
+        <input type="button" value="left_insert" id="left_insert">
+      </label>
+      <label for="right_insert">
+        <input type="button" value="right_insert" id="right_insert">
+      </label>
+      <label for="left_out">
+        <input type="button" value="left_out" id="left_out">
+      </label>
+      <label for="right_out">
+        <input type="button" value="right_out" id="right_out">
+      </label>
+    </div>
+    <div id="box">
+
+    </div>
+  </div>
+
+  <script src="../common/myFunc.js"></script>
+  <script>
+    window.onload = function () {
+      var $box = document.getElementById('box');
+      var $left_insert = document.getElementById('left_insert');
+      var $left_out = document.getElementById('left_out');
+      var $input = document.getElementById('input');
+      var $search = document.getElementById('search');
+      var data = [];
+
+      function init () {
+        $left_insert.onclick = left_insert;
+        $left_out.onclick = left_out;
+        $search.onclick = search;
+      }
+      function checkInput () {
+        /* 用正则分割输入的字符串
+        * 判断是否有输出
+        * 返回一个数组*/
+        var value = $input.value.match(/[a-z0-9\u0391-\uFFE5]+/g);
+        if (!value) return false;
+        return value;
+      }
+
+      function left_insert () {
+        /* 从左侧插入节点
+        * 获取节点列表
+        * 检查节点数量
+        * 重置输入框
+        * 遍历输入的词添加到盒子
+        * 用一个数组保存所有词*/
+        var value = checkInput();
+        var $list_item = document.getElementsByClassName('item');
+        if (!value || $list_item.length >= 60) return false;
+
+        $input.value = '';
+        value.forEach(function (item) {
+          var $item = createElement('div', item);
+          var id = data.length;
+          $item.className = 'item';
+          $item.id = id;
+          $box.insertBefore($item, $list_item[0]);
+          data[id] = item;
+        });
+      }
+
+      function del (array, index) {
+        /* 删除一个数组中的一项*/
+        for (var i = index; i < array.length - 1; i++) {
+          array[i] = array[i + 1];
+        }
+        array.length -= 1;
+      }
+
+      function left_out () {
+        /* 删除左侧的第一个节点
+        * 检查是否有节点
+        * 删除词的数据
+        * 删除节点*/
+        var $list_item = document.getElementsByClassName('item');
+        if (!$list_item.length) return false;
+        del(data, parseInt($list_item[0].id));
+        $box.removeChild($list_item[0]);
+      }
+
+      function search () {
+        /* 搜索词
+        * 获取输入
+        * 查找符合条件的节点
+        * 修改节点的颜色 */
+        var value = checkInput();
+        if (!value) return false;
+
+        value.forEach(function (item) {
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].search(item) !== -1) {
+              var $item = document.getElementById(i + '');
+              $item.style.color = '#fff';
+            }
+          }
+        });
+      }
+
+      init();
+    }
+  </script>
+</body>
+</html>

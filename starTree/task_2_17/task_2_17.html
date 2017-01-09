@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <link rel="stylesheet" href="../common/myStyle.css">
+  <style>
+    .box {
+      margin-top: 50px;
+    }
+    .aqi-chart-wrap {
+      position: relative;
+      width: 95%;
+      height: 600px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: flex-end;
+      justify-content: space-around;
+      margin: auto;
+      background-color: #333;
+    }
+    .aqi-chart-wrap li {
+      background-color: #999;
+    }
+  </style>
+</head>
+<body>
+  <fieldset>
+    <legend>日期</legend>
+    <label for="day">日 <input type="radio" id="day" name="date" value="day"></label>
+    <label for="week">周 <input type="radio" id="week" name="date" value="week"></label>
+    <label for="month">月 <input type="radio" id="month" name="date" value="month"></label>
+  </fieldset>
+  <fieldset>
+    <legend>城市</legend>
+    <label for="city">
+      <select name="city" id="city">
+        <option value="beijing" selected="selected">北京</option>
+        <option value="chengdu">成都</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <div class="box">
+    <ul class="aqi-chart-wrap"></ul>
+  </div>
+  <script src="../common/myFunc.js"></script>
+  <script src="task_2_17.js"></script>
+</body>
+</html>

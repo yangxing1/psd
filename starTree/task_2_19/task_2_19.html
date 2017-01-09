@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <link rel="stylesheet" href="../common/myStyle.css">
+  <style>
+    .box {
+      position: relative;
+      width: 1200px;
+      border: 1px solid #00ffcc;
+    }
+    .box .head {
+      position: relative;
+      height: 50px;
+      line-height: 50px;
+      border-bottom: 1px solid #00ffcc;
+    }
+    .box .head label {
+      float: left;
+      margin-left: 20px;
+    }
+    .box .main {
+      height: 400px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: flex-end;
+    }
+    .box .item {
+      width: 15px;
+      margin-left: 5px;
+      background-color: #ff00ff;
+      font-size: 5px;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <form action="#" class="head clearfix">
+    <label for="input"><input type="text" id="input"></label>
+    <label for="left_insert"><input type="button" id="left_insert" value="左侧入"></label>
+    <label for="right_insert"><input type="button" id="right_insert" value="右侧入"></label>
+    <label for="left_out"><input type="button" id="left_out" value="左侧出"></label>
+    <label for="right_out"><input type="button" id="right_out" value="右侧出"></label>
+    <label for="play"><input type="button" id="play" value="Play"></label>
+    <label for="stop"><input type="button" id="stop" value="Stop"></label>
+  </form>
+  <div class="main">
+    <div class="item" style="height:200px;"></div>
+    <div class="item" style="height:300px;"></div>
+    <div class="item" style="height:100px;"></div>
+  </div>
+</div>
+<script src="../common/myFunc.js"></script>
+<script>
+  function init() {
+    var $input = document.getElementById('input');
+    var $left_insert = document.getElementById('left_insert');
+    var $left_out = document.getElementById('left_out');
+    var $right_insert = document.getElementById('right_insert');
+    var $right_out = document.getElementById('right_out');
+    var $play = document.getElementById('play');
+    var $stop = document.getElementById('stop');
+    var $main = document.getElementsByClassName('main')[0];
+
+    /* 添加节点时判断input是否有输入*/
+    function check_input() {
+      var list_item = document.getElementsByClassName('item');
+      if (list_item.length >= 60) {
+        alert('No >= 60');
+        return false;
+      }
+      return $input.value ? true : false;
+    }
+
+    /* 动画函数
+     * 需要的参数有两个对象
+     */
+    function animate(item1, item2) {
+      function get_func() {
+        var height1, height2;
+        var max1 = height1 = item1.value;
+        var max2 = height2 = item2.value;
+        var count = 0;
+        return function () {
+          if (max1 < max2) {
+            height1 += (max2 - max1) / 20;
+            height2 -= (max2 - max1) / 20;
+          }
+          else {
+            height1 -= (max1 - max2) / 20;
+            height2 += (max1 - max2) / 20;
+          }
+          item1.style.height = height1 + 'px';
+          item2.style.height = height2 + 'px';
+          if (count == 20) {
+            item1.style.height = max2 + 'px';
+            item2.style.height = max1 + 'px';
+            clearInterval(timer);
+          }
+          count++;
+        };
+      }
+      var timer = setInterval(get_func(), 50);
+    }
+
+    /* 比较连个数字
+     * 使用递归遍历数组
+     * 如果有偏差调用动画函数
+     * 延时调用自身*/
+    function compare(item, list, index, judge) {
+      if (index == list.length) {
+        circle.index++;
+        circle(list, circle.index, judge);
+        return undefined;
+      }
+      item.value = parseInt(item.style.height.substring(0, item.style.height.indexOf('p')));
+      list[index].value = parseInt(list[index].style.height.substring(0, list[index].style.height.indexOf('p')));
+      function self_func (time) {
+        setTimeout(function () {
+          compare(item, list, index + 1, judge);
+        }, time);
+      }
+
+      if (judge) {
+        if (item.value < list[index].value) {
+          animate(item, list[index]);
+          self_func(1000);
+        }
+        else self_func(100);
+      }
+      else {
+        if(item.value > list[index].value) {
+          animate(item, list[index]);
+          self_func(1000);
+        }
+        else self_func(100);
+      }
+    }
+
+    /* 开始动画
+     * 使用递归和计时器做出动画效果 */
+    function circle(list, index, judge) {
+      circle.index = index;
+      if (index == list.length) return undefined;
+      compare(list[index], list, index, judge);
+    }
+
+    /* 绑定按钮事件
+     * 左侧入使用insertBefore()
+     * 如果盒子里没有节点使用appendChild() */
+    $left_insert.onclick = function () {
+      if (!check_input()) return undefined;
+      var value = $input.value;
+      var $item = createElement('div');
+      var list_item = document.getElementsByClassName('item');
+      $item.className = 'item';
+      $item.style.height = parseInt(value) / 1000 * 400 + 'px';
+      $input.value = '';
+      if (list_item.length) {
+        $main.insertBefore($item, list_item[0]);
+      }
+      else {
+        $main.appendChild($item);
+      }
+    };
+    /* 右侧入直接使用appendchild() */
+    $right_insert.onclick = function () {
+      if (!check_input()) return undefined;
+      var value = $input.value;
+      var $item = createElement('div');
+      $item.className = 'item';
+      $item.style.height = parseInt(value) / 1000 * 400 + 'px';
+      $input.value = '';
+      $main.appendChild($item);
+    };
+    $left_out.onclick = function () {
+      var list_item = document.getElementsByClassName('item');
+      $main.removeChild(list_item[0]);
+    };
+    $right_out.onclick = function () {
+      var list_item = document.getElementsByClassName('item');
+      $main.removeChild(list_item[list_item.length - 1]);
+    };
+
+    $play.onclick = function () {
+      var list_item = document.getElementsByClassName('item');
+      circle(list_item, 0, false);
+    };
+    $stop.onclick = function () {
+      var list_item = document.getElementsByClassName('item');
+      circle(list_item, 0, true);
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
