@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .page {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 900px;
+      height: 500px;
+      margin:auto;
+    }
+    .box {
+      margin: 0 10px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #00ffcc;
+      background-color: #999;
+    }
+    .box .value {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      padding: 0 10px;
+      color: #fff;
+    }
+
+    .level_origin {
+      height: 100px;
+    }
+    .level_1 {
+      height: 60px;
+    }
+    .level_2 {
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="box level_origin">
+      <span class="value">hello</span>
+      <div class="box level_1">
+        <span class="value">world</span>
+        <div class="box level_2">
+          <span class="value">jack</span>
+        </div>
+        <div class="box level_2">
+          <span class="value">jack</span>
+        </div>
+        <div class="box level_2">
+          <span class="value">jack</span>
+        </div>
+      </div>
+      <div class="box level_1">
+        <span class="value">world</span>
+        <div class="box level_2">
+          <span class="value">jack</span>
+        </div>
+        <div class="box level_2">
+          <span class="value">jack</span>
+        </div>
+      </div>
+      <div class="box level_1">
+        <span class="value">world</span>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="../common/myFunc.js"></script>
+<script>
+  function Tree() {
+    this.origin = new TreeNode('origin', 'origin', 'origin');
+  }
+  function TreeNode(value, id, level) {
+    this.value = value;
+    this.id = id;
+    this.level = level;
+    this.childs = [];
+  }
+
+  Tree.prototype.mapAll = function (mapAllFunc, func, parent) {
+    mapAllFunc(mapAllFunc, func, this.origin, parent);
+  };
+
+  TreeNode.prototype.insert = function (parentId) {
+    var $parent = document.getElementById('parentId');
+    var str_node = '<span class="value">' + this.value + '</span>';
+    var $node = createElement('div', str_node);
+    $node.className = 'box level_' + this.level;
+    $node.id = this.id;
+    $parent.appendChild($node);
+  };
+
+
+  function map1(mapAllFunc, func, node, parent) {
+    if (!node) return undefined;
+    func(node, parent);
+    if (node.childs.length) {
+      node.childs.forEach(function (item) {
+        mapAllFunc(mapAllFunc, func, item, node);
+      });
+    }
+  }
+
+</script>
+</html>

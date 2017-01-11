@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .page {
+      width: 602px;
+      margin: 20px auto;
+    }
+    .two_origin {
+      height: 200px;
+      width: 600px;
+    }
+    .two_1 {
+      height: 150px;
+      width: 280px;
+    }
+    .two_2 {
+      height: 100px;
+      width: 120px;
+    }
+    .two_3 {
+      height: 50px;
+      width: 40px;
+    }
+    .two_parent {
+      position: relative;
+      display: flex;
+      padding: 0 5px;
+      margin-bottom: 10px;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+      align-items: flex-end;
+      border: 1px solid #00ffcc;
+      background-color: #999;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+    }
+    .two_parent .value {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 5px;
+    }
+
+    .show {
+      background-color: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="box">
+    <label for="play"><input type="button" value="play" id="play"></label>
+    <label for="play1"><input type="button" value="play1" id="play1"></label>
+    <label for="play2"><input type="button" value="play2" id="play2"></label>
+    <label for="create"><input type="button" value="create" id="create"></label>
+
+  </div>
+  <script src="../common/myFunc.js"></script>
+  <script>
+    function Two() {
+      // 一个二叉树的类
+      this.origin = new TwoNode('origin');
+    }
+    function TwoNode(value, first, last) {
+      // 二叉树的子节点的类
+      this.value = value ? value : 'null';
+      this.id = TwoNode.__length__++;
+      this.first = first ? first : null;
+      this.last = last ? last : null;
+    }
+    TwoNode.__length__ = 0;
+
+    Two.__createTwo__ = function (node, over, index) {
+      // 创建一个示例的二叉树
+      // 没有规则的二叉树只是一个另类的链表
+      if (index === over) return undefined;
+
+      node.first = new TwoNode(index + '');
+      Two.__createTwo__(node.first, over, index + 1);
+
+      node.last = new TwoNode(index + '');
+      Two.__createTwo__(node.last, over, index + 1);
+    };
+    Two.__mapAll__ = function (parent, node, mapAll, func) {
+      /* 遍历一个二叉树
+      * 不知道用的什么算法 */
+      if (node === null) return undefined;
+      func(node, parent);
+      mapAll(node, node.first, mapAll, func);
+      mapAll(node, node.last, mapAll, func);
+    };
+    Two.__mapAll1__ = function (parent, node, mapAll, func) {
+      if (node === null) return undefined;
+      mapAll(node, node.first, mapAll, func);
+      func(node, parent);
+      mapAll(node, node.last, mapAll, func);
+    };
+    Two.__mapAll2__ = function (parent, node, mapAll, func) {
+      if (node === null) return undefined;
+      mapAll(node, node.first, mapAll, func);
+      mapAll(node, node.last, mapAll, func);
+      func(node, parent);
+    };
+    Two.prototype.all = function (mapAll, func) {
+      /* 使用传递的参数遍历这个二叉树 */
+      mapAll({id: 'box'}, this.origin, mapAll, func);
+    };
+    Two.prototype.create = function () {
+      Two.__createTwo__(this.origin, 4, 1);
+    };
+
+    function init() {
+      var $play = document.getElementById('play');
+      var $play1 = document.getElementById('play1');
+      var $play2 = document.getElementById('play2');
+      var $create = document.getElementById('create');
+      var temp = new Two();
+
+      function showFunc (node) {
+        var $node = document.getElementById(node.id);
+        var str_class;
+        setTimeout(function () {
+          str_class = $node.className;
+          $node.className += ' show';
+        }, showFunc.time);
+        showFunc.time += 500;
+        setTimeout(function (){
+          $node.className = str_class;
+          if (node.id === TwoNode.__length__ - 1) {
+            showFunc.time = 0;
+          }
+        }, showFunc.time);
+        showFunc.time += 500;
+      }
+
+      function create() {
+        temp.create();
+        temp.all(Two.__mapAll__, function (node, parent) {
+          var $parent = document.getElementById(parent.id);
+          var $node = createElement('div');
+          $node.className = 'two_parent two_' + node.value;
+          $node.id = node.id + '';
+          var $value = createElement('span', node.value);
+          $value.className = 'value';
+
+          $node.appendChild($value);
+          $parent.appendChild($node);
+        });
+      }
+
+      function showAll (mapAll) {
+        showFunc.time = 0;
+        return function () {
+          temp.all(mapAll, showFunc);
+        };
+      }
+      $play.onclick = showAll(Two.__mapAll__);
+      $play1.onclick = showAll(Two.__mapAll1__);
+      $play2.onclick = showAll(Two.__mapAll2__);
+      $create.onclick = create;
+    }
+    init();
+  </script>
+</body>
+</html>

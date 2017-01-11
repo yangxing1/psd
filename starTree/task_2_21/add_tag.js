@@ -3,10 +3,10 @@
  */
 "use strict";
 
-function AddTag (box_id, input_id) {
+function AddTag (parent_id, mark) {
   this.data = [];
-  this.box = document.getElementById(box_id);
-  this.input =document.getElementById(input_id);
+  this.mark = mark;
+  this.parent = document.getElementById(parent_id);
 }
 AddTag.prototype.add = function () {
   /* 添加子节点
@@ -15,20 +15,59 @@ AddTag.prototype.add = function () {
   var value;
   var self = this;
   if (value = AddTag.__check__.call(self)) {
-    var childs = this.box.childNodes;
+    var childNodes = this.print.childNodes;
     value.forEach(function (item) {
       if (self.data.length == 10) {
         // 如果数量大于10 以队列的方式删除节点
-        self.remove(childs[self.data.length-1]);
+        self.remove(childNodes[self.data.length-1]);
       }
       if (!AddTag.__noRepeat__.call(self, item)) return undefined;
       var $item = createElement('li', item);
-      self.box.insertBefore($item, childs[0]);
-      $item.className = 'item';
+      self.print.insertBefore($item, childNodes[0]);
+      $item.className = 'tag';
       self.hover($item);
       self.data[self.data.length] = item;
     });
   }
+};
+AddTag.prototype.create = function () {
+  /* 创建默认需要的几个部件
+   * 如果有特殊需求可以使用该类的实例对象修改
+    * 或覆盖类的方法
+    * 解析：创建标签，添加各自的样式名和id
+    * 添加事件
+    * 添加到指定的位置 */
+  var self = this;
+
+  var $input = createElement('input');
+  var $label_input = createElement('label');
+  $label_input.setAttribute('for', this.mark + '_input');
+  $input.id = this.mark + '_input';
+  $input.setAttribute('type', 'text');
+  $input.className = 'addTagBox_input';
+  $label_input.appendChild($input);
+  self.input = $input;
+
+  var $button = createElement('input');
+  var $label_button = createElement('label');
+  $label_button.setAttribute('for', this.mark + '_button');
+  $button.id = this.mark + '_button';
+  $button.setAttribute('type', 'button');
+  $button.className = 'addTagBox_button';
+  $button.value = 'Add_TAG';
+  $button.onclick = function () {
+    self.add();
+  };
+  $label_button.appendChild($button);
+  self.button = $button;
+
+  var $print = createElement('ul');
+  $print.className = 'addTagBox_print';
+  self.print = $print;
+
+  var $box = createElement('div', $label_input, $label_button, $print);
+  $box.className = 'addTagBox';
+  this.parent.appendChild($box);
 };
 AddTag.__noRepeat__ = function (str) {
   /* 检查是否有重复
@@ -62,7 +101,7 @@ AddTag.prototype.remove = function (item) {
       AddTag.__del__.call(this, i);
     }
   }
-  this.box.removeChild(item);
+  this.print.removeChild(item);
 };
 AddTag.__del__ = function (index) {
   // 删除数据中的一项
@@ -74,13 +113,13 @@ AddTag.__del__ = function (index) {
 AddTag.prototype.hover = function (item) {
   /* 对item节点添加三个事件
   * 鼠标移动到节点上动画
-  * 0.5秒之后改变内容，添加点击时间
+  * 0.5秒之后改变内容，添加点击事件
   * 鼠标移出后还原节点 */
   var self = this;
   var value = item.innerHTML;
   var timer;
   item.onmouseover = function () {
-    item.className += ' item_hover';
+    item.className += ' tag_hover';
     timer = setTimeout(function () {
       item.innerHTML = 'Delete';
       item.onclick = function () {
@@ -90,7 +129,7 @@ AddTag.prototype.hover = function (item) {
   };
 
   item.onmouseout = function () {
-    item.className = 'item';
+    item.className = 'tag';
     clearTimeout(timer);
 
     // 预防超过0.5秒之后移出再点击

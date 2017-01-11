@@ -1,51 +1,37 @@
 /* 作为一个组件的样式, 我决定为她新建一个文件
 * 希望以后会有用到的地方 */
 
-body {
-  background-color: #eee;
-}
-
-.page {
+.addTagBox {
   position: relative;
-  width: 90%;
-  margin: auto;
-}
-
-.box {
-  position: relative;
-  width: 50%;
-  margin: 20px auto;
-  border-bottom: 2px solid #00ffcc;
-}
-
-.box input, .box textarea {
-  padding: 0;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-.box #tag {
-  width: calc(100% - 2px);
-}
-.box #like {
-  width: calc(100% - 42px);
-  height: 100px;
-  padding: 20px;
-}
-.box #like_define {
   width: 100%;
-}
-.box #like_define, .box #tag {
-  height: 35px;
+  border-bottom: 2px solid #00ffcc;
+  margin-top: 20px;
 }
 
-.box_child {
+.addTagBox .addTagBox_input {
+  width: calc(100% - 24px);
+  padding: 0 10px;
+  font-size: 20px;
+}
+.addTagBox .addTagBox_button {
+  width: 100%;
+  height: 35px;
+  padding: 0;
+}
+.addTagBox .addTagBox_button:hover {
+  background-color: #111;
+  color: #fff;
+  transition: all 0.5s;
+}
+.addTagBox .addTagBox_print {
+  width: 100%;
   padding: 0 10px;
   margin: 10px 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
 }
-.box_child .item {
+.addTagBox .addTagBox_print .tag {
   height: 25px;
   margin-left: 5px;
   margin-top: 5px;
@@ -57,14 +43,10 @@ body {
   border-radius: 12px;
   cursor: pointer;
 }
-
-
-.box_child .item_hover {
+.addTagBox .addTagBox_print .tag_hover {
   background-color: #111;
   transition: all 0.5s;
 }
-.box #tag:hover, .box #like_define:hover {
-  background-color: #111;
-  color: #fff;
-  transition: all 0.5s;
+.addTagBox .addTagBox_input, .addTagBox .addTagBox_button, .addTagBox .addTagBox_print {
+  margin-bottom: 10px;
 }
