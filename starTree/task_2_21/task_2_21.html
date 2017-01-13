@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>starTree</title>
   <link rel="stylesheet" href="../common/myStyle.css">
-  <link rel="stylesheet" href="./add_tag.css">
+  <link rel="stylesheet" href="../common/add_tag.css">
   <style>
     body {
       background-color: #eee;
@@ -27,14 +27,14 @@
     </div>
   </div>
   <script src="../common/myFunc.js"></script>
-  <script src="./add_tag.js"></script>
+  <script src="../common/add_tag.js"></script>
   <script>
     var tag = new AddTag('parent1', 'tag');
     var like = new AddTag('parent2', 'like');
 
     tag.create();
     function init_tag() {
-      tag.parent.removeChild(tag.button);
+      tag.box.removeChild(tag.box.getElementsByTagName('label')[1]);
       tag.input.onkeyup = function (event) {
         var code = event.keyCode;
         if (code === 13 || code === 32 || code === 190 || code === 188) {

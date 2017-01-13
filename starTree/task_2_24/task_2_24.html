@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .page {
+      position: absolute;
+      width: 300px;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .treeNode {
+      position: relative;
+      width: 90%;
+      display: flex;
+      flex-flow: column nowrap;
+      margin-top: 10px;
+      margin-left: 10%;
+      background-color: #999;
+      cursor: pointer;
+    }
+    .show {
+      background-color: #333;
+    }
+    .treeNode .value {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="button">
+      <label for="input"><input type="text" id="input"></label><br/>
+      <label for="search_button"><input type="button" id="search_button" value="search_button"></label>
+      <label for="addNode_button"><input type="button" id="addNode_button" value="addNode_button"></label>
+      <label for="removeNode"><input type="button" id="removeNode" value="removeNode"></label>
+    </div>
+    <div class="box"></div>
+
+  </div>
+
+  <script src="../common/myFunc.js"></script>
+  <script>
+    function Tree() {
+      this.origin = Tree.__createNode__('origin', 'origin');
+    }
+
+    Tree.__createNode__ = function (value, func) {
+      var $node = createElement('div');
+      var $value = createElement('span', value);
+      $value.className = 'value';
+      $value.onclick = func;
+
+      $node.className = 'treeNode';
+      $node.appendChild($value);
+      return $node;
+    };
+
+    Tree.prototype.createTree = function (str) {
+      var self = this;
+
+      function func () {
+        if (self.optionNode !== this) {
+          if (self.optionNode) {
+            self.optionNode.className = 'value';
+          }
+          self.optionNode = this;
+          self.optionNode.className += ' show';
+        }
+        else {
+          self.optionNode.className = 'value';
+          self.optionNode = undefined;
+        }
+      }
+
+      Tree.__createFunc__ = function (node, str, index, func) {
+        for (var i = 1; i < node.childNodes.length; i++) {
+          if (getValue.call(node.childNodes[i]) === str[index]) {
+            Tree.__createFunc__(node.childNodes[i], str, index + 1, func);
+            return undefined;
+          }
+        }
+        var $newNode = Tree.__createNode__(str[index], func);
+        node.appendChild($newNode);
+      };
+
+      for (var i = 0; i < str.length; i++) {
+        Tree.__createFunc__(this.origin, str[i].split('/'), 0, func);
+      }
+    };
+
+    Tree.prototype.searchTree = function (value) {
+      if (this.optionNode) this.optionNode.className = 'value';
+      var values = this.origin.getElementsByTagName('span');
+      for (var i = 0; i < values.length; i++) {
+        if (values[i].innerHTML === value) {
+          this.optionNode = values[i];
+          this.optionNode.className += ' show';
+        }
+      }
+    };
+
+    function getValue() {
+      var value = this.getElementsByClassName('value')[0];
+      return value.innerHTML;
+    }
+
+    function init() {
+      var str = ['absolute', 'border', 'center', 'absolute/title', 'absolute/items', 'border/temp ', 'border/move', 'border/print'];
+      var temp = new Tree();
+      temp.createTree(str);
+      var $parent = document.getElementsByClassName('box')[0];
+      $parent.appendChild(temp.origin);
+
+      var $search_button = document.getElementById('search_button');
+      var $input = document.getElementById('input');
+      var $addNode_button = document.getElementById('addNode_button');
+      var $removeNode = document.getElementById('removeNode');
+
+      $search_button.onclick = function () {
+        var value = $input.value;
+        if (!value) return undefined;
+        temp.searchTree(value);
+        $input.value = '';
+      };
+      $addNode_button.onclick = function () {
+        var value = $input.value;
+        var self = temp;
+        if (!value) return undefined;
+        if (!temp.optionNode) return undefined;
+        var $item = Tree.__createNode__(value, function() {
+          if (self.optionNode !== this) {
+            if (self.optionNode) {
+              self.optionNode.className = 'value';
+            }
+            self.optionNode = this;
+            self.optionNode.className += ' show';
+          }
+          else {
+            self.optionNode.className = 'value';
+            self.optionNode = undefined;
+          }
+        });
+        temp.optionNode.parentNode.appendChild($item);
+        $input.value = '';
+      };
+      $removeNode.onclick = function () {
+        if (!temp.optionNode) return undefined;
+        var $node = temp.optionNode.parentNode;
+        var $parent = $node.parentNode;
+        $parent.removeChild($node);
+        temp.optionNode = undefined;
+      }
+    }
+    init();
+  </script>
+</body>
+</html>

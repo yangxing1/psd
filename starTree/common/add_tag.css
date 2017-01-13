@@ -1,0 +1,52 @@
+/* 作为一个组件的样式, 我决定为她新建一个文件
+* 希望以后会有用到的地方 */
+
+.addTagBox {
+  position: relative;
+  width: 100%;
+  border-bottom: 2px solid #00ffcc;
+  margin-top: 20px;
+}
+
+.addTagBox .addTagBox_input {
+  width: calc(100% - 24px);
+  padding: 0 10px;
+  font-size: 20px;
+}
+.addTagBox .addTagBox_button {
+  width: 100%;
+  height: 35px;
+  padding: 0;
+}
+.addTagBox .addTagBox_button:hover {
+  background-color: #111;
+  color: #fff;
+  transition: all 0.5s;
+}
+.addTagBox .addTagBox_print {
+  width: 100%;
+  padding: 0 10px;
+  margin: 10px 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+.addTagBox .addTagBox_print .tag {
+  height: 25px;
+  margin-left: 5px;
+  margin-top: 5px;
+  padding: 0 10px;
+  font-size: 16px;
+  line-height: 25px;
+  color: #fff;
+  background-color: #555;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.addTagBox .addTagBox_print .tag_hover {
+  background-color: #111;
+  transition: all 0.5s;
+}
+.addTagBox .addTagBox_input, .addTagBox .addTagBox_button, .addTagBox .addTagBox_print {
+  margin-bottom: 10px;
+}

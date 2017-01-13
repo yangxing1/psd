@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>starTree</title>
   <style>
+    body {
+      background-color: #ccc;
+    }
     .page {
       position: absolute;
       left: 0;
@@ -40,42 +43,28 @@
     .level_2 {
       height: 20px;
     }
+
+    .show {
+      background-color: #111;
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="box level_origin">
-      <span class="value">hello</span>
-      <div class="box level_1">
-        <span class="value">world</span>
-        <div class="box level_2">
-          <span class="value">jack</span>
-        </div>
-        <div class="box level_2">
-          <span class="value">jack</span>
-        </div>
-        <div class="box level_2">
-          <span class="value">jack</span>
-        </div>
-      </div>
-      <div class="box level_1">
-        <span class="value">world</span>
-        <div class="box level_2">
-          <span class="value">jack</span>
-        </div>
-        <div class="box level_2">
-          <span class="value">jack</span>
-        </div>
-      </div>
-      <div class="box level_1">
-        <span class="value">world</span>
-      </div>
+    <div class="button">
+      <label for="play"><input type="button" id="play" value="play"></label><br/>
+      <label for="search_input"><input type="text" id="search_input"></label>
+      <label for="search_button"><input type="button" id="search_button" value="search_button"></label>
+    </div>
+    <div id="box">
+
     </div>
   </div>
 </body>
 
 <script src="../common/myFunc.js"></script>
-<script>
+
+<script type="text/javascript">
   function Tree() {
     this.origin = new TreeNode('origin', 'origin', 'origin');
   }
@@ -86,29 +75,160 @@
     this.childs = [];
   }
 
-  Tree.prototype.mapAll = function (mapAllFunc, func, parent) {
-    mapAllFunc(mapAllFunc, func, this.origin, parent);
-  };
-
   TreeNode.prototype.insert = function (parentId) {
-    var $parent = document.getElementById('parentId');
-    var str_node = '<span class="value">' + this.value + '</span>';
-    var $node = createElement('div', str_node);
+    /* 插入一个节点到文档中 */
+    var $parent = document.getElementById(parentId);
+    var $value = createElement('span', this.value);
+    $value.className = 'value';
+
+    var $node = createElement('div', $value);
     $node.className = 'box level_' + this.level;
     $node.id = this.id;
     $parent.appendChild($node);
   };
 
+  Tree.__createFunc__ = function (node, str, index) {
+    /* 递归遍历str
+     * 找到新的数据添加一个子节点到当前节点*/
+    for (var i = 0; i < node.childs.length; i++) {
+      if (node.childs[i].value === str[index]) {
+        Tree.__createFunc__(node.childs[i], str, index + 1);
+        return undefined;
+      }
+    }
 
-  function map1(mapAllFunc, func, node, parent) {
-    if (!node) return undefined;
-    func(node, parent);
-    if (node.childs.length) {
-      node.childs.forEach(function (item) {
-        mapAllFunc(mapAllFunc, func, item, node);
+    // 添加子节点
+    var count = node.childs.length;
+    node.childs[count] = new TreeNode(str[index], str.join('-') ,index + 1);
+
+    // 将添加的子节点插入到文档中
+    node.childs[count].insert(node.id);
+  };
+
+  Tree.prototype.createTree = function (str, parentId) {
+    /* 创建一个树，用指定的数据创建一个树
+     * 所有数据用'/'分割为各个等级
+      * 创建的同时插入到文档中 */
+
+    // 将根节点插入到文档中
+    this.origin.insert(parentId);
+
+    for (var i = 0; i < str.length; i++) {
+      var chars = str[i].split('/');
+      Tree.__createFunc__(this.origin, chars, 0);
+    }
+  };
+
+  Tree.__mapAll__ = function (node, func) {
+    /* 遍历整个树，为每个节点调用一次函数 */
+    func(node);
+
+    for (var i = 0; i < node.childs.length; i++) {
+      Tree.__mapAll__(node.childs[i], func)
+    }
+  };
+
+  function nodeOver($node, time) {
+    /* 在一段时间后修改node的className */
+    setTimeout(function () {
+      $node.className += ' show';
+    }, time);
+  }
+  function nodeOut($node, className, time) {
+    /* 同上一个函数，只是将className还原 */
+    setTimeout(function () {
+      $node.className = className;
+    }, time);
+  }
+
+  function mapAllShow(TreeObj, timer) {
+    /* 遍历这个树，以动画形式遍历 */
+    var time = timer;
+    function func (node) {
+      /* 给每个节点添加一个延时修改className的函数 */
+      var $node = document.getElementById(node.id);
+      var className = $node.className;
+
+      nodeOver($node, time);
+      time += timer;
+      nodeOut($node, className, time);
+      time += timer;
+    }
+
+    Tree.__mapAll__(TreeObj.origin, func);
+  }
+
+  function mapAllSearch(TreeObj, timer, query) {
+    /* 遍历这个树，检查节点的值
+     * 返回一个数组，数组的每个元素都是查找道德节点
+     * 找到一个节点，以特殊方式显示，并且不复原 */
+    var time = timer;
+    var optionNode = [];
+    function func(node) {
+      /* 查找所有的节点
+      * 顺带把所有的节点点亮*/
+      var $node = document.getElementById(node.id);
+      var className = $node.className;
+
+      nodeOver($node, time);
+
+      time += timer;
+      if (node.value === query) {
+        nodeOver($node, time);
+        optionNode.push(node);
+      }
+      else {
+        nodeOut($node, className, time);
+      }
+      time += timer;
+    }
+
+    Tree.__mapAll__(TreeObj.origin, func);
+    if (!optionNode.length) {
+      setTimeout(function () {
+        alert('No search in origin is ' + query);
+      }, time);
+    }
+    return optionNode;
+  }
+
+  function optionNodeHidden (optionNode) {
+    /* 删除节点特殊显示的className */
+    if (optionNode) {
+      optionNode.forEach(function (item) {
+        var $optionNode = document.getElementById(item.id);
+        var className = $optionNode.className;
+        $optionNode.className = className.substring(0, className.indexOf(' '));
       });
     }
   }
+
+  function init() {
+    var str = ['a', 'b', 'c', 'a/temp', 'a/item', 'b/temp', 'b/item', 'b/print'];
+    var temp = new Tree();
+    temp.createTree(str, 'box');
+
+    var $play = document.getElementById('play');
+    var $search_button = document.getElementById('search_button');
+    var $search_input = document.getElementById('search_input');
+    var optionNode;
+
+    $play.onclick = function () {
+      optionNodeHidden(optionNode);
+      mapAllShow(temp, 500);
+    };
+
+    $search_button.onclick = function () {
+      var value;
+      optionNodeHidden(optionNode);
+      if (!$search_input.value) return false;
+      value = $search_input.value.replace(/[ ]+/g, '');
+      optionNode = mapAllSearch(temp, 300, value);
+      $search_input.value = '';
+    };
+  }
+
+  init();
 
 </script>
 </html>
