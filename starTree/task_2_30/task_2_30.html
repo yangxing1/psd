@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .page {
+      position: absolute;
+      width: 400px;
+      left: 0;
+      top: 20px;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .form_item .item_name {
+      width: 10%;
+      text-align: center;
+    }
+    .form_item label {
+      width: 100%;
+      height: 52px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+    .form_item label input {
+      width: 70%;
+      height: 20px;
+      padding-left: 10px;
+      border-radius: 3px;
+      border: 2px solid #999;
+    }
+    .form_item label .point {
+      width: 70%;
+      height: 26px;
+      margin-left: 30%;
+      color: #999;
+      visibility: hidden;
+    }
+
+    .form_submit {
+      width: 20%;
+      margin-left: 80%;
+    }
+    .form_submit label  input {
+      width: 100%;
+      height: 26px;
+      border: none;
+      box-shadow: none;
+      border-radius: 6px;
+      background-color: #00c7d6;
+      color: #fff;
+      font-size: 18px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="page">
+  <p class="form_item">
+    <label for="name">
+      <span class="item_name">名称</span>
+      <input type="text" id="name">
+      <span class="point">长度为4-16个字符</span>
+    </label>
+  </p>
+  <p class="form_item">
+    <label for="pass">
+      <span class="item_name">密码</span>
+      <input type="password" id="pass">
+      <span class="point">长度为4-16个字符</span>
+    </label>
+  </p>
+  <p class="form_item">
+    <label for="passRe">
+      <span class="item_name">密码</span>
+      <input type="password" id="passRe">
+      <span class="point">请再次输入相同的密码</span>
+    </label>
+  </p>
+  <p class="form_item">
+    <label for="mail">
+      <span class="item_name">邮箱</span>
+      <input type="text" id="mail">
+      <span class="point">邮箱地址</span>
+    </label>
+  </p>
+  <p class="form_item">
+    <label for="tel">
+      <span class="item_name">手机</span>
+      <input type="text" id="tel">
+      <span class="point">11位手机号</span>
+    </label>
+  </p>
+  <p class="form_submit">
+    <label for="submit">
+      <input type="submit" id="submit" value="submit">
+    </label>
+  </p>
+</div>
+
+<script>
+  var $name = document.getElementById('name');
+  var $pass = document.getElementById('pass');
+  var $passRe = document.getElementById('passRe');
+  var $mail = document.getElementById('mail');
+  var $tel = document.getElementById('tel');
+  var $submit = document.getElementById('submit');
+
+  function pointShow() {
+    var $point = this.parentNode.getElementsByClassName('point')[0];
+    $point.style.visibility = 'visible';
+  }
+  function errorPoint(str) {
+    var $point = getPoint.call(this);
+    $point.innerHTML = str;
+    $point.style.color = '#cf4a36';
+    $point.style.visibility = 'visible';
+    this.style.borderColor = '#cf4a36';
+    this.value = '';
+  }
+  function rightPoint(str) {
+    var $point = getPoint.call(this);
+    $point.innerHTML = str;
+    $point.style.color = '#00c7d6';
+    this.style.borderColor = '#999';
+  }
+  function getPoint() {
+    return this.parentNode.getElementsByClassName('point')[0];
+  }
+  function checkName () {
+    var value = this.value.match(/[^ ]+/g);
+    if (!value) {
+      errorPoint.call(this, '名称不能为空');
+      return undefined;
+    }
+    value = value.join('');
+    var length = value.length;
+    if (value.match(/[^\x00-\xff]/g)) {
+      length += value.match(/[^\x00-\xff]/g).length;
+    }
+    if (length < 4 || length > 16) {
+      errorPoint.call(this, '长度为4~16个字符');
+      return undefined;
+    }
+    else {
+      rightPoint.call(this, '名称输入正确');
+      return true;
+    }
+  }
+  function checkPass() {
+    var value = this.value.match(/[^ ]+/g);
+    if (!value) {
+      errorPoint.call(this, '密码不能为空');
+      return undefined;
+    }
+    value = value.join('');
+    var length = value.length;
+    if (value.match(/[^\x00-\xff]/g)) {
+      length += value.match(/[^\x00-\xff]/g).length;
+    }
+    if (length < 4 || length > 16) {
+      errorPoint.call(this, '长度为4~16个字符');
+      return undefined;
+    }
+    else {
+      rightPoint.call(this, '密码格式正确');
+      return true;
+    }
+  }
+  function checkPassRe() {
+    var pass_value = $pass.value;
+    if (!pass_value) {
+      errorPoint.call(this, '密码不能为空');
+      return undefined;
+    }
+    var value = $passRe.value;
+    if (value !== pass_value) {
+      errorPoint.call(this, '密码输入错误');
+      return undefined;
+    }
+    else {
+      rightPoint.call(this, '密码输入正确');
+      return true;
+    }
+  }
+  function checkMail() {
+    var value = this.value;
+    var apos = value.indexOf("@");
+    var dotpos = value.lastIndexOf(".");
+    if (apos < 1 || dotpos - apos < 2) {
+      errorPoint.call(this, '邮箱格式错误');
+      return false
+    }
+    else {
+      rightPoint.call(this, '邮箱输入正确');
+      return true
+    }
+  }
+  function checkTel() {
+    var value = this.value;
+    if (!value) {
+      errorPoint.call(this, '号码不能为空');
+      return undefined;
+    }
+    if (value.search(/[^0-9]/) !== -1) {
+      errorPoint.call(this, '号码只能是数字');
+      return undefined;
+    }
+    var length = value.match(/[0-g]/g).length;
+    if (length !== 11) {
+      errorPoint.call(this, '号码只能是11位');
+      return undefined;
+    }
+    else {
+      rightPoint.call(this, '号码输入正确');
+      return true;
+    }
+  }
+  function checkAll() {
+    var judge = [];
+    judge.push($name.onblur());
+    judge.push($pass.onblur());
+    judge.push($passRe.onblur());
+    judge.push($mail.onblur());
+    judge.push($tel.onblur());
+
+    for (var i = 0; i < judge.length; i++) {
+      if (!judge[i]) {
+        alert('请重新输入');
+        return undefined;
+      }
+    }
+    alert('验证成功');
+  }
+
+  $name.onfocus = pointShow;
+  $name.onblur = checkName;
+  $pass.onfocus = pointShow;
+  $pass.onblur = checkPass;
+  $passRe.onfocus = pointShow;
+  $passRe.onblur = checkPassRe;
+  $mail.onfocus = pointShow;
+  $mail.onblur = checkMail;
+  $tel.onfocus = pointShow;
+  $tel.onblur = checkTel;
+  $submit.onclick = checkAll;
+</script>
+</body>
+</html>

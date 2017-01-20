@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .page {
+      position: absolute;
+      width: 400px;
+      left: 0;
+      top: 20px;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .form_item {
+      width: 100%;
+      height: 52px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      align-content: space-between;
+    }
+    .form_item .item_name {
+      width: 10%;
+      text-align: center;
+    }
+    .form_item label[for="name"] {
+      width: 70%;
+    }
+    .form_item .input {
+      width: calc(100% - 4px);
+      height: 20px;
+      padding-left: 10px;
+      border-radius: 3px;
+      border: 2px solid #999;
+    }
+    .form_item label[for="name_button"] {
+      width: 10%;
+    }
+    .form_item .button {
+      width: 100%;
+      height: 24px;
+      color: #fff;
+      box-shadow: none;
+      border: none;
+      border-radius: 3px;
+      background-color: #388ac1;
+    }
+    .form_item .point {
+      width: 80%;
+      height: 20px;
+      margin-left: 15%;
+      color: #999;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="form_item">
+      <span class="item_name">名称</span>
+      <label for="name"><input type="text" id="name" class="input"></label>
+      <label for="name_button"><input type="button" id="name_button" value="验证" class="button"></label>
+      <span class="point">必填，长度为4~16个字符</span>
+    </div>
+    <div class="form_item">
+
+    </div>
+  </div>
+
+  <script>
+    var $input = document.getElementsByClassName('input')[0];
+    var $button = document.getElementsByClassName('button')[0];
+    var $point = document.getElementsByClassName('point')[0];
+
+    function errorPoint(str) {
+      $point.innerHTML = str;
+      $point.style.color = '#cf4a36';
+      $input.style.borderColor = '#cf4a36';
+      $input.value = '';
+    }
+
+    $button.onclick = function () {
+      var value = $input.value.match(/[^ ]+/g);
+      if (!value) {
+        errorPoint('名称不能为空');
+        return undefined;
+      }
+      value = value.join('');
+      var length = value.length;
+      if (value.match(/[^\x00-\xff]/g)) {
+        length += value.match(/[^\x00-\xff]/g).length;
+      }
+      if (length < 4 || length > 16) {
+        errorPoint('长度为4~16个字符');
+        return undefined;
+      }
+      $point.innerHTML = '名字格式正确';
+      $point.style.color = '#00c7d6';
+    };
+  </script>
+</body>
+</html>

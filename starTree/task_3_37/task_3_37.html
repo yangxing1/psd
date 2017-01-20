@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      height: 1000px;
+      width: 2000px;
+    }
+    .cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0.5;
+      background-color: #333;
+    }
+    .cover .wicket {
+      position: absolute;
+      width: 300px;
+      height: 170px;
+      background-color: #ddd;
+    }
+    .cover .wicket .title {
+      height: 30px;
+      display: block;
+      line-height: 30px;
+      text-align: center;
+      background-color: #00c7d6;
+    }
+    .cover .wicket .content {
+      width: calc(100% - 20px);
+      height: 80px;
+      margin: 0;
+      padding: 10px;
+    }
+    .cover .wicket .buttons {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+    }
+    .cover .wicket .button input {
+      width: 50px;
+      height: 30px;
+      margin-bottom: 10px;
+      border: none;
+      box-shadow: none;
+      background-color: #388ac1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <p class="text">
+      hello, world
+    </p>
+  </div>
+
+  <script src="../common/myFunc.js"></script>
+  <script>
+    function getCover(title, content) {
+      function createCover (title, content) {
+        /* 创建一个文档元素
+         * 这是一个浮出层
+         * 遮盖层是文档的面积
+         * 弹出窗自动居中
+         * 绑定滚动时间scroll
+         * 滚动更改弹出窗top,left*/
+        var $wicket_title = createElement('span', title);
+        $wicket_title.className = 'title';
+        var $wicket_content = createElement('p', content);
+        $wicket_content.className = 'content';
+
+        // 两个按钮
+        var $ok = createElement('input');
+        $ok.id = createCover.length + 'ok';
+        createCover.length++;
+        $ok.setAttribute('type', 'button');
+        $ok.setAttribute('value', '确定');
+        var $no = createElement('input');
+        $no.id = createCover.length + 'no';
+        createCover.length++;
+        $no.setAttribute('type', 'button');
+        $no.setAttribute('value', '取消');
+        // 按钮点击
+        $ok.onclick = $no.onclick = function () {
+          this.parentNode.parentNode.parentNode.parentNode.remove();
+          window.onscoll = undefined;
+        };
+        var $label_ok = createElement('label', $ok);
+        $label_ok.setAttribute('for', $ok.id);
+        var $label_no = createElement('label', $no);
+        $label_no.setAttribute('for', $no.id);
+        var $wicket_buttons = createElement('div', $label_ok, $label_no);
+        $wicket_buttons.className = 'buttons';
+
+        // 弹出窗
+        var $wicket = createElement('wicket', $wicket_title, $wicket_content, $wicket_buttons);
+        $wicket.addEventListener('click', function(event) {
+          // 阻止冒泡
+          event.stopPropagation();
+        }, false);
+        $wicket.className = 'wicket';
+
+        // 遮盖层
+        var $cover = createElement('div', $wicket);
+        $cover.addEventListener('click', function() {
+          this.remove();
+          // 滚动事件还原
+          window.onscroll = undefined;
+        }, false);
+        $cover.className = 'cover';
+        // 设置遮盖层为文档高度和宽度
+        var height = window.innerHeight > document.body.clientHeight ? window.innerHeight - 17 : document.body.clientHeight;
+        var width = window.innerWidth > document.body.clientWidth ? window.innerWidth - 17 : document.body.clientWidth;
+        $cover.style.width = width + 'px';
+        $cover.style.height = height + 'px';
+
+        window.onscroll = function () {
+          // 滚动时修改弹出窗的位置
+          $wicket.style.top = (window.innerHeight / 2) + document.body.scrollTop - 85 + 'px';
+          $wicket.style.left = (window.innerWidth / 2) + document.body.scrollLeft - 150 + 'px';
+        };
+        // 弹出窗的位置
+        window.onscroll();
+        return $cover;
+      }
+      var obj = {
+        element: createCover(title, content)
+      };
+      obj.show = function () {
+        document.body.appendChild(this.element);
+      };
+      obj.hidden = function () {
+        this.element.remove();
+      };
+
+      return obj;
+    }
+
+    function init() {
+      var temp = getCover('这是标题', '这是内容');
+      temp.show();
+    }
+    init();
+  </script>
+</body>
+</html>

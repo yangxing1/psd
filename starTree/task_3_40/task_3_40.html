@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .dateBox {
+      width: 175px;
+      padding-top: 10px;
+      border: 2px solid #8a8c93;
+      border-radius: 10px;
+    }
+    .dateBox .weekBox {
+      margin-top: 10px;
+      display: flex;
+      flex-flow: row nowrap;
+      border-bottom: 2px solid #000000;
+    }
+    .dateBox .weekBox .weekItem {
+      width: 25px;
+      height: 25px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      color: #111;
+      font-weight: bold;
+    }
+    .dateBox .selectBox {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+    }
+    .dateBox .dateList {
+      margin-top: 10px;
+      display: flex;
+      flex-flow: row wrap;
+    }
+    .dateBox .dateList .dateItem {
+      width: 25px;
+      height: 25px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="dateParent">
+
+</div>
+<script src="../common/jquery.min.js"></script>
+<script>
+  function DateBox(date /* Date */, parent/* Element */) {
+    this.date = date;
+    this.parent = parent;
+  }
+  DateBox.prototype = {
+    createSelect: function () {
+      /* 创建选择日期的选择器
+       * 将这两个对象保存在实例中， */
+      var $year = $('<select></select>');
+      for (var i = this.date.getFullYear() - 5; i < this.date.getFullYear() + 5; i++) {
+        var $optionHtml = $('<option value="' + i + '">' + i +'</option>');
+        if (i == this.date.getFullYear()) {
+          $optionHtml.attr('selected', 'selected');
+        }
+        $year.append($optionHtml);
+      }
+      var $month = $('<select></select>');
+      for (i = 1; i <= 12; i++) {
+        $optionHtml = $('<option value="' + i + '">' + i + '</option>');
+        if (i == this.date.getMonth() + 1) {
+          $optionHtml.attr('selected', 'selected');
+        }
+        $month.append($optionHtml);
+      }
+      this.$year = $year;
+      this.$month = $month;
+      $year.click(this.dateChange(this));
+      $month.click(this.dateChange(this));
+
+      var $selectBox = $('<div class="selectBox"></div>');
+      $selectBox.append($year, $month);
+      return $selectBox;
+    },
+    createWeek: function () {
+      /* 创建星期的七个块 */
+      var $weekBox = $('<div class="weekBox"></div>');
+      var array = ['日', '一', '二', '三', '四', '五', '六'];
+      for (var i = 0; i < array.length; i++) {
+        var $weekItem = $('<div class="weekItem">' + array[i] + '</div>');
+        $weekBox.append($weekItem);
+      }
+      return $weekBox;
+    },
+    createDate: function () {
+      /* 创建所有的日期小方块
+       * 给当前时间上的小方块添加点击事件
+       * 非当前的时间不同的颜色 */
+      var $dateList = document.createElement('div');
+      $dateList.className = 'dateList';
+      $dateList = $($dateList);
+      this.$dateList = $dateList;
+
+      var dateStr = this.date.getFullYear() + '-' + (this.date.getMonth() + 1);
+      var dateTemp = new Date(dateStr);
+      var dateForm = new Date(dateStr);
+      var dateTo = new Date(dateStr);
+      dateForm.setDate(dateTemp.getDate() - dateTemp.getDay());
+      dateTo.setMonth(dateTemp.getMonth() + 1);
+      dateTo.setDate(dateTo.getDate() + (6 - dateTo.getDay()));
+
+      for (; dateForm <= dateTo; dateForm.setDate(dateForm.getDate() + 1)) {
+        var $dateItem = $('<div class="dateItem">' + dateForm.getDate() + '</div>');
+        $dateItem.css({
+          'color': '#999'
+        });
+        if (dateForm.getMonth() === dateTemp.getMonth()) {
+          $dateItem.css({
+            'color': '#333',
+            'cursor': 'pointer'
+          });
+          $dateItem.click(this.dateActive(this));
+        }
+        $dateList.append($dateItem);
+      }
+
+      return $dateList;
+
+      /*
+       for (var i = dateTemp.getDay(); i > 0; i--) {
+       dateTemp.setDate(dateTemp.getDate() - i);
+       dateList.push(dateTemp.getDate());
+       }
+       for (dateTemp = new Date(dateStr); dateTemp.getMonth() < this.date.getMonth() + 1; dateTemp.setDate(dateTemp.getDate() + 1)) {
+       dateList.push(dateTemp.getDate());
+       }
+       for (i = dateTemp.getDay(); i <= 6 ; dateTemp.setDate(dateTemp.getDate() + 1), i++) {
+       dateList.push(dateTemp.getDate());
+       }
+       */
+    },
+    createDateBox: function () {
+      /* 创建日历组件
+       * 依次是选择年和月
+        * 星期表
+        * 以及该月的日期*/
+      var $DateBox = $('<div class="dateBox"></div>');
+      this.$DateBox = $DateBox;
+      $DateBox.append(this.createSelect());
+      $DateBox.append(this.createWeek());
+      $DateBox.append(this.createDate());
+
+      this.$DateBox = $DateBox;
+      this.parent.append($DateBox);
+    },
+    dateActive: function (self) {
+      /* 选取一个日期
+       * 覆盖或创建一个日期
+        * 修改样式*/
+      return function () {
+        self.active = new Date(self.date);
+        self.active.setDate($(this).text());
+        var $dateItem = $('div', self.$dateList);
+        if ($dateItem) {
+          $dateItem.css({
+            'backgroundColor': '#fff'
+          });
+        }
+        $(this).css({
+          'backgroundColor': '#2189bf'
+        });
+        if (self.$title) {
+          self.$title.val(self.active.getFullYear() + '/' + (self.active.getMonth()+1) + '/' + self.active.getDate());
+          self.$DateBox.css({
+            'visibility': 'hidden'
+          });
+        }
+        if (self.callBack) {
+          self.callBack();
+        }
+      }
+    },
+    dateChange: function (self) {
+      /* 对年和月的修改 */
+      return function () {
+        var year = self.$year[0].options[self.$year[0].selectedIndex].innerHTML;
+        var month = self.$month[0].selectedIndex;
+        self.date.setFullYear(year);
+        self.date.setMonth(month);
+        self.$dateList.remove();
+        self.$DateBox.append(self.createDate());
+      }
+    },
+    getActive: function () {
+      if (this.active) {
+        return this.active;
+      }
+      else {
+        return this.date;
+      }
+    },
+    setActive: function (date/* Date */) {
+      /* 修改时间
+       * 重新绘制
+        * 将选中的时间触发点击*/
+      this.date = date;
+      if (this.$DateBox) this.$DateBox.remove();
+      this.createDateBox();
+      var $dateItem = $('div.dateItem', this.$dateList);
+      for (var i = 0; i < $dateItem.length; i++) {
+        if ($($dateItem[i]).text() === date.getDate() + '') {
+          $($dateItem[i]).trigger('click');
+          break;
+        }
+      }
+    },
+    insertTitle: function () {
+      var self = this;
+
+      var $title = $('<input id="dateTitle">');
+      self.$title = $title;
+      $title.val(this.date.getFullYear() + '/' + (this.date.getMonth()+1) + '/' + this.date.getDate());
+      $title.click(function () {
+        self.$DateBox.css({
+          'visibility': 'visible'
+        });
+      });
+      var $label = $('<label for="dateTitle"></label>');
+      $label.append($title);
+      self.parent.append($label);
+      self.createDateBox();
+      self.$DateBox.css({
+        'visibility': 'hidden'
+      });
+    }
+  };
+
+  var $dateParent = $('.dateParent');
+
+  var temp = new DateBox(new Date('2016-1-2'), $dateParent);
+
+  temp.insertTitle();
+</script>
+</body>
+</html>

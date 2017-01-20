@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <link rel="stylesheet" href="../common/createForm.css">
+  <style>
+    .page {
+      position: absolute;
+      width: 400px;
+      left: 0;
+      top: 20px;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .page form {
+      border: 2px solid #00c7d6;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <form class="box1">
+
+    </form>
+    <form class="box2">
+
+    </form>
+  </div>
+
+  <script src="../common/myFunc.js"></script>
+  <script src="../common/createForm.js"></script>
+  <script>
+
+    var box1 = document.getElementsByClassName('box1')[0];
+    box1.onsubmit = function () {
+      return false;
+    };
+
+    insertForm(box1, 'Name', 'text', checkName, '必填，长度为4-16字符', '格式正确', '长度为4-16字符');
+    insertForm(box1, 'Pass', 'password', checkPass, '必填，长度为4-16字符', '密码正确', '限制长度在4-16');
+    insertForm(box1, 'Submit', 'submit', checkAll, '', '验证通过', '验证失败');
+
+    var box2 = document.getElementsByClassName('box2')[0];
+
+    insertForm(box2, 'Name', 'text', checkName, '必填，长度为4-16字符', '格式正确', '长度为4-16字符');
+    insertForm(box2, 'PassWord', 'password', checkPass, '必填，长度为4-16字符', '密码正确', '限制长度为4-16');
+    insertForm(box2, 'PassWordRe', 'password', checkPassRe, '输入相同密码', '密码正确', '密码错误');
+    insertForm(box2, 'Mail', 'mail', checkMail, '输入邮箱地址', '邮箱正确', '邮箱错误');
+    insertForm(box2, 'Tel', 'tel', checkTel, '输入11位手机号', '号码正确', '只能是数字');
+    insertForm(box2, 'Submit', 'submit', checkAll, '', '验证通过', '验证失败');
+  </script>
+</body>
+</html>

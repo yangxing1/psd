@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .page {
+      position: absolute;
+      width: 400px;
+      left: 0;
+      top: 20px;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .page .radio {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+    }
+    .page .content {
+      position: relative;
+      height: 26px;
+      margin-top: 40px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+    }
+    .content .label {
+      width: 20%;
+      line-height: 26px;
+      text-align: center;
+    }
+
+    .yesschool label{
+      width: 25%;
+    }
+    .content select {
+      width: 100%;
+      height: 26px;
+    }
+    .content label[for="jobdir"] {
+      width: 70%;
+    }
+    .content #jobdir {
+      width: 100%;
+      height: 20px;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="radio">
+      <label for="yes"><input type="radio" value="yes" name="school" id="yes" checked="checked">在校生</label>
+      <label for="no"><input type="radio" value="no" name="school" id="no">非在校生</label><br/>
+    </div>
+
+    <div class="yesschool content">
+      <span class="label">学校</span>
+      <label for="city">
+        <select name="city" id="city">
+          <option value="beijing" selected="selected">北京</option>
+          <option value="chengdu">成都</option>
+        </select>
+      </label>
+      <label for="beijing">
+        <select name="school" id="beijing">
+          <option value="qinghua">五道口</option>
+          <option value="ligong">理工</option>
+        </select>
+      </label>
+      <label for="chengdu">
+        <select name="school" id="chengdu">
+          <option value="meishu">美术</option>
+          <option value="xinan">西南</option>
+        </select>
+      </label>
+    </div>
+    <div class="noschool content">
+      <span class="label">就业单位</span>
+      <label for="jobdir">
+        <input type="text" id="jobdir">
+      </label>
+    </div>
+  </div>
+
+  <script>
+    var $parent = document.getElementsByClassName('page')[0];
+    var $temp1 = document.getElementsByClassName('yesschool')[0];
+    var $temp2 = document.getElementsByClassName('noschool')[0];
+    var $beijing = document.getElementById('beijing');
+    var $chengdu = document.getElementById('chengdu');
+    var $school = document.getElementById('yes');
+    var $noSchool = document.getElementById('no');
+    var $city = document.getElementById('city');
+    window.onload = function () {
+      $temp2.remove();
+      $chengdu.parentNode.remove();
+    };
+
+    $school.onclick = function () {
+      $temp2.remove();
+      $parent.appendChild($temp1);
+    };
+    $noSchool.onclick = function () {
+      $temp1.remove();
+      $parent.appendChild($temp2);
+    };
+    $city.onchange = function () {
+      var options = this.getElementsByTagName('option');
+      for (var i = 0; i < options.length; i++) {
+        if (options[i].selected) break;
+      }
+      if (options[i].value === 'beijing') {
+        $chengdu.parentNode.remove();
+        $temp1.appendChild($beijing.parentNode);
+      }
+      else if (options[i].value === 'chengdu') {
+        $beijing.parentNode.remove();
+        $temp1.appendChild($chengdu.parentNode);
+      }
+    }
+
+  </script>
+</body>
+</html>

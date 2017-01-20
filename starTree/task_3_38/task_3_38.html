@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="box1"></div>
+  <div id="box2"></div>
+<script src="../common/myFunc.js"></script>
+<script>
+  function TableTool(config) {
+    this.data = config;
+  }
+  TableTool.prototype = {
+    createTable: function () {
+
+      var tr_head = createElement('tr');
+      for (var i = 0; i < this.data.table_head.length; i++) {
+        // 创建一个td
+        var td_temp = createElement('td', this.data.table_head[i]);
+
+        if (this.data.table_sort[i]) {
+          // 如果有排序的按钮
+          var sortUpButton = createElement('span', '↑');
+          var sortDownButton = createElement('span', '↓');
+
+          // 给按钮体添加事件
+          sortUpButton.onclick = this.sortUp(i);
+          sortDownButton.onclick = this.sortDown(i);
+
+          // 给按钮添加样式
+          sortUpButton.style.width = sortDownButton.style.width = '30px';
+          sortUpButton.style.height = sortDownButton.style.height = '25px';
+          sortUpButton.style.textAlign = sortDownButton.style.textAlign = 'center';
+          sortUpButton.style.lineHeight = sortDownButton.style.lineHeight = '25px';
+          sortUpButton.style.display = sortDownButton.style.display = 'block';
+          sortDownButton.style.cursor = sortUpButton.style.cursor = 'pointer';
+
+          // 创建按钮盒子并装到td里
+          var buttons = createElement('div', sortUpButton, sortDownButton);
+          buttons.style.width = '30px';
+          buttons.style.height = this.data.tdWH.height + 'px';
+          td_temp.appendChild(buttons);
+        }
+        tr_head.appendChild(td_temp);
+      }
+
+      var thead = createElement('thead', tr_head);
+
+      // 表格内容部分
+      var tbody = createElement('tbody');
+      for (i = 0; i < this.data.table_body.length; i++) {
+        var tr_temp = createElement('tr');
+        for (var j = 0; j < this.data.table_body[i].length; j++) {
+          td_temp = createElement('td', this.data.table_body[i][j] + '');
+          tr_temp.appendChild(td_temp);
+        }
+        tbody.appendChild(tr_temp);
+      }
+
+      // 创建表格, 将表头及内容添加到表格中
+      var table = createElement('table', thead, tbody);
+
+      // 操作td的样式
+      var tds = table.getElementsByTagName('td');
+      for (i = 0; i < tds.length; i++) {
+        tds[i].style.display = 'flex';
+        tds[i].style.flexFlow = 'row nowrap';
+        tds[i].style.justifyContent = 'space-around';
+        tds[i].style.alignItems = 'center';
+        tds[i].style.width = this.data.tdWH.width + 'px';
+        tds[i].style.height = this.data.tdWH.height + 'px';
+        tds[i].style.border = 'solid 1px #fff';
+      }
+
+      // 操作tr的样式
+      var trs = table.getElementsByTagName('tr');
+      for (i = 0; i < trs.length; i++) {
+        trs[i].style.display = 'flex';
+        trs[i].style.flexFlow = 'row nowrap';
+      }
+
+      // 设置表格的背景色
+      table.style.borderCollapse = "collapse";
+      thead.style.backgroundColor = this.data.table_headColor;
+      tbody.style.backgroundColor = this.data.table_bodyColor;
+
+      // 将表格插入到文档
+      this.data.parent.appendChild(table);
+      this.element = table;
+    },
+    sortUp: function (index) {
+      /* 排序事件
+      * 可以在实例中覆盖该属性后再创建表格*/
+      var self = this;
+
+      return function () {
+        var data = self.data.table_body;
+        data.sort(function (a, b) {
+          return b[index] - a[index];
+        });
+        self.repeat();
+      }
+    },
+    sortDown: function (index) {
+      var self = this;
+
+      return function () {
+        var data = self.data.table_body;
+        data.sort(function (a, b) {
+          return a[index] - b[index];
+        });
+        self.repeat();
+      }
+    },
+    repeat: function () {
+      this.element.remove();
+      this.createTable();
+    }
+  };
+
+  var table1 = new TableTool({
+    table_head: ['姓名', '语文', '数学', '英语'],
+    table_sort: [0, 1, 1, 1],
+    table_body: [
+      ['小明', 60, 25, 30],
+      ['小红', 20, 20, 20],
+      ['小李', 30, 90, 5],
+            ['小家', 40, 45, 50]
+    ],
+    table_headColor: '#666',
+    table_bodyColor: '#999',
+    tdWH: {width: 150, height: 50},
+    parent: document.getElementById('box1')
+  });
+  table1.createTable();
+
+  var table2 = new TableTool({
+    table_head: ['姓名', '身高', '体重', '颜值', '金钱'],
+    table_sort: [0, 1, 1, 1, 1],
+    table_body: [
+            ['小明', 180, 180, 80, 80],
+            ['小李', 170, 120, 100, 70],
+            ['小王', 160, 150, 50, 100],
+            ['小习', 160, 200, 40, 10000],
+            ['小江', 160, 180, 40, 10000]
+    ],
+    table_headColor: '#ff0',
+    table_bodyColor: '#999',
+    tdWH: {width: 100, height: 50},
+    parent: document.getElementById('box2')
+  });
+  table2.createTable();
+</script>
+</body>
+</html>

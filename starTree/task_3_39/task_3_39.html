@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>starTree</title>
+  <style>
+    .box {
+      height: 800px;
+    }
+    table {
+      position: relative;
+      left: 100px;
+    }
+    td {
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+    thead {
+      background-color: #388ac1;
+    }
+    tbody {
+      background-color: #999;
+    }
+  </style>
+</head>
+<body>
+  <p class="box">占位</p>
+  <table>
+    <thead>
+    <tr><td>姓名</td><td>小红</td><td>小明</td></tr>
+    </thead>
+    <tbody>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    <tr><td>语文</td><td>100</td><td>100</td></tr>
+    </tbody>
+  </table>
+  <p class="box">占位</p>
+  <script>
+    function headFixed(table) {
+      /* 将参数中的table改造成表头会移动的表格 */
+      var thead = table.getElementsByTagName('thead')[0];
+
+      var d = window.document.documentElement;
+      window.scrollTo(0, 0);      // 重置滚动条
+
+      var rect = thead.getBoundingClientRect();
+      var theadTop = rect.top + d.scrollTop;   // thead在文档中的坐标
+      var theadLeft = rect.left + d.scrollLeft;
+      var theadStyle = window.getComputedStyle(thead, null);  // 获取thead的position
+      var theadPosition = theadStyle.position;
+      var tableHeight = table.clientHeight;             // 获取table的高度
+
+      window.onscroll = function () {
+        var scrollTop = document.body.scrollTop;
+
+        if (scrollTop > theadTop && scrollTop < (theadTop + tableHeight)) {
+          // 判断滚动是否到达table或超过table
+          thead.style.position = 'fixed';
+          thead.style.left = theadLeft + 'px';
+          thead.style.top = '0px';
+        }
+        else {
+          // 还原thead
+          thead.style.position = theadPosition;
+        }
+      };
+    }
+
+    var $table = document.getElementsByTagName('table')[0];
+    headFixed($table);
+  </script>
+</body>
+</html>
